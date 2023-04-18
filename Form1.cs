@@ -48,20 +48,7 @@ namespace ScriptHelper
 
         }
 
-        private void Movie_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Get the TabControl object from the sender parameter
-            TabControl tabControl = sender as TabControl;
-
-            if (tabControl != null)
-            {
-                // Get the currently selected tab
-                TabPage selectedTab = tabControl.SelectedTab;
-
-                // Display a message box with the selected tab's name
-                MessageBox.Show("Selected tab: " + selectedTab.Name);
-            }
-        }
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
