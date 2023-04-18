@@ -21,6 +21,11 @@ namespace ScriptHelper
 
             return string.Empty;
         }
+        public static string makePendingMessage(string model)
+        {
+            return "awaiting reponse from " + model + "\n";
 
+
+        }
     }
 }

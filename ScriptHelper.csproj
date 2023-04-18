@@ -99,6 +99,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Scratch.cs" />
+    <Compile Include="MovieObj.cs" />
     <Compile Include="SceneObj.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="MyGPT.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
