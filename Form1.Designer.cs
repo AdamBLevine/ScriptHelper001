@@ -45,9 +45,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.MovieHintText = new System.Windows.Forms.TextBox();
             this.ScenesTab = new System.Windows.Forms.TabPage();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.CharactersTab = new System.Windows.Forms.TabPage();
             this.Settings = new System.Windows.Forms.TabPage();
             this.button4 = new System.Windows.Forms.Button();
@@ -57,8 +54,6 @@
             this.Movie.SuspendLayout();
             this.MovieTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SceneCount)).BeginInit();
-            this.ScenesTab.SuspendLayout();
-            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Movie
@@ -97,7 +92,6 @@
             this.MovieTab.TabIndex = 0;
             this.MovieTab.Text = "Movie";
             this.MovieTab.UseVisualStyleBackColor = true;
-            
             // 
             // label5
             // 
@@ -254,7 +248,6 @@
             // 
             // ScenesTab
             // 
-            this.ScenesTab.Controls.Add(this.tabControl1);
             this.ScenesTab.Location = new System.Drawing.Point(4, 40);
             this.ScenesTab.Name = "ScenesTab";
             this.ScenesTab.Padding = new System.Windows.Forms.Padding(3);
@@ -262,36 +255,6 @@
             this.ScenesTab.TabIndex = 1;
             this.ScenesTab.Text = "Scenes";
             this.ScenesTab.UseVisualStyleBackColor = true;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(385, 81);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(8, 8);
-            this.tabControl1.TabIndex = 0;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 40);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(0, 0);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 40);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(0, 0);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "tabPage4";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // CharactersTab
             // 
@@ -376,8 +339,6 @@
             this.MovieTab.ResumeLayout(false);
             this.MovieTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SceneCount)).EndInit();
-            this.ScenesTab.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -388,9 +349,6 @@
         private System.Windows.Forms.TabControl Movie;
         private System.Windows.Forms.TabPage MovieTab;
         private System.Windows.Forms.TabPage ScenesTab;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage CharactersTab;
         private System.Windows.Forms.TabPage Settings;
         private System.Windows.Forms.TextBox MovieHintText;

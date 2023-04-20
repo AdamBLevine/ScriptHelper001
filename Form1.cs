@@ -46,6 +46,8 @@ namespace ScriptHelper
 
             MovieHintText.Text = makePrototypeMovieHint();
 
+            Movie.SelectedIndexChanged += Movie_SelectedIndexChanged;
+
         }
 
         
@@ -55,7 +57,16 @@ namespace ScriptHelper
 
         }
 
-        
+        private void Movie_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TabControl tabControl = sender as TabControl;
+            if (tabControl != null)
+            {
+                int selectedIndex = tabControl.SelectedIndex;
+                // Perform your desired actions based on the selected index.
+                MessageBox.Show($"Selected tab index: {selectedIndex}");
+            }
+        }
 
         private void Button1_Click(object sender, EventArgs e)
         {
