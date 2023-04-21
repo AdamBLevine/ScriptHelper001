@@ -22,6 +22,7 @@ namespace ScriptHelper
 
 
         List<SceneObj> scenes;
+        List<SceneObj> scenesinscenes;
         SceneObj scene;
 
         MovieObj movie;
@@ -40,7 +41,7 @@ namespace ScriptHelper
 
 
             ScenesList.DataSource = scenes;
-
+            SceneInScenesList.DataSource = scenesinscenes;
 
             ScenesList.DisplayMember = "Title";
 
@@ -63,8 +64,20 @@ namespace ScriptHelper
             if (tabControl != null)
             {
                 int selectedIndex = tabControl.SelectedIndex;
+                if (selectedIndex == 1)
+                {
+
+                    SceneInScenesList.DataSource = scenes;
+                    SceneInScenesList.DisplayMember = "Title";
+                    Application.DoEvents();
+
+                    int picked = SceneInScenesList.SelectedIndex;
+                    SceneHint.Text = scenes[picked].Description;
+                    Application.DoEvents();
+
+                }
                 // Perform your desired actions based on the selected index.
-                MessageBox.Show($"Selected tab index: {selectedIndex}");
+                // MessageBox.Show($"Selected tab index: {selectedIndex}");
             }
         }
 
@@ -211,7 +224,7 @@ unprepared for the assualt.  The Union soldiers were cooking dinner and flee mos
                 // var ListofList = JsonConvert.DeserializeObject(SceneDescriptions.Text);
                 var listOfLists = JsonConvert.DeserializeObject<List<List<string>>>(SceneDescriptions.Text);
 
-                List<SceneObj> scenes = new List<SceneObj>();
+                scenes = new List<SceneObj>();
                 foreach (List<string> myScene in listOfLists)
                 {
 
@@ -229,6 +242,28 @@ unprepared for the assualt.  The Union soldiers were cooking dinner and flee mos
             }
 
 
+        }
+
+        private void SceneInScenesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int picked = SceneInScenesList.SelectedIndex;
+            SceneHint.Text = scenes[picked].Description;
+            Application.DoEvents();
+        }
+
+        private void SceneHint_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private async void button6_Click(object sender, EventArgs e)
+        {
+            
+            SceneText.Text = SceneHint.Text + "  >> " + gptModel + " awaiting reply...";
+            string reply =   await MyGPT.makeSceneText(api, SceneHint.Text, gptModel);
+            SceneText.Text = reply;
+
+            
         }
     }
 }

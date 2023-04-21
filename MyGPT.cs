@@ -77,8 +77,8 @@ It does not need to be easily human readbable. Enclose the compressed descriptio
             string systemPrompt = " We are working on a movie script.  The user prompt will provide a description of the movie.";
             systemPrompt += " Please output " + sceneKount.ToString() + " scenes for the movie.";
             systemPrompt += " Each scene should include a title and a description of the action in that scene enclosed. ";
-            systemPrompt += " Do not include scene numbers.  Output as JSON list of lists with each of the inner list consisting of ";
-            systemPrompt +=   " first the title as a string then the description as a string.";
+            systemPrompt += " Do not include scene numbers. Do not include any newlines.  Output as JSON list of lists with each of the inner list consisting of ";
+            systemPrompt +=   " first element in the inner list should be the title as a string.  The second element in the inner list should be the description as a string.";
 
 
 
@@ -99,5 +99,27 @@ It does not need to be easily human readbable. Enclose the compressed descriptio
 
             return response;
         }
+        public static async Task<string> makeSceneText(IOpenAIAPI api, string input, string model)
+        {
+            string systemPrompt = @" We are working on a movie script.  The user prompt will be some hints about a scene in the movie.  Please use those hints to write a detailed description of what
+the scene is about. Do not provide any names for the characters.  Enclose the scene description in square brackets like these []. ";
+
+
+            var chat = api.Chat.CreateConversation();
+            chat.RequestParameters.Model = model;
+
+            // chat.RequestParameters.Model = ;
+            chat.RequestParameters.MaxTokens = 500;
+            string x = chat.RequestParameters.Model.ToString();
+            /// give instruction as System
+            chat.AppendSystemMessage(systemPrompt);
+
+            chat.AppendUserInput(input);
+
+            string response = await chat.GetResponseFromChatbotAsync();
+
+            return response;
+        }
+
     }
 }
