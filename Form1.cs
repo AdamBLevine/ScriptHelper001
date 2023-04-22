@@ -176,37 +176,11 @@ namespace ScriptHelper
 
 
         }
-        private void makeProtoTypeScenes()
-        {
-            SceneObj scene = new SceneObj();
-            scene.Title = "Before The Assault";
-            scene.Description = @"several hundred COnfederate soldiers are forming up into a line in the woods, just west of the end of the Union line.  It is getting late in the afternoon, about 
-5:00pm";
-
-            scenes.Add(scene);
-
-            scene = new SceneObj();
-
-            scene.Title = "The Assault";
-            scene.Description = @"several hundred COnfederate soldiers charge from the woods yelliung and shooting as the over run the left end of the Union Army who were completely
-unprepared for the assualt.  The Union soldiers were cooking dinner and flee mostly without their weapons";
-
-
-            scenes.Add(scene);
-
-
-            scene = new SceneObj();
-
-            scene.Title = "After The Assault";
-            scene.Description = @"several hundred COnfederate soldiers are are picking through the tents and packs of hte Union soldiers who ran from the assault";
-
-
-            scenes.Add(scene);
-        }
-
+ 
         private string makePrototypeMovieHint()
         {
-            string hint = @"a 19 year old man meets a 39 year old married woman, and they both fall in love. A passionate affair ensues, which ends tragically when her husband kills them both";
+            string hint = @"a 19 year old man <Robert> meets a 39 year old married woman <Beth>, and they both fall in love.
+ A passionate affair ensues, which ends tragically when her husband <Oscar> kills them both";
             return hint;
         }
 

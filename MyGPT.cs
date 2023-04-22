@@ -30,8 +30,10 @@ namespace ScriptHelper
 
         public static async Task<string> makeMovieText(IOpenAIAPI api , string input, string model)
         {
-            string systemPrompt = @" We are working on a movie script.  The user prompt will be some hints about the movie.  Please use those hints to write a detailed description of what
-the movie is about. Do not provide any names for the characters.  Enclose the description in square brackets like these []. ";
+            string systemPrompt = @" We are working on a movie script.  The user prompt will be some hints about the movie.  Some
+ of the main character names will be provided in angle brackets <>.  Example: <Mary>. Please use the hints to write a detailed description of what
+ the movie is about. As needed, create additional characters.  Use only first names for the characters in the decription and include the names in angle brackets <>.  Example <Robert>.
+ Be sure the character names are enclosed in angle brackets <> ";
 
 
             var chat = api.Chat.CreateConversation();
@@ -88,7 +90,7 @@ It does not need to be easily human readbable. Enclose the compressed descriptio
             chat.RequestParameters.MaxTokens = 3000;
 
             // chat.RequestParameters.Model = ;
-            chat.RequestParameters.MaxTokens = 500;
+            
             string x = chat.RequestParameters.Model.ToString();
             /// give instruction as System
             chat.AppendSystemMessage(systemPrompt);
