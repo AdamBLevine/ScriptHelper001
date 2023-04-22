@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using OpenAI_API;
 
 namespace ScriptHelper
@@ -30,10 +31,37 @@ namespace ScriptHelper
 
         public static async Task<string> makeMovieText(IOpenAIAPI api , string input, string model)
         {
-            string systemPrompt = @" We are working on a movie script.  The user prompt will be some hints about the movie.  Some
- of the main character names will be provided in angle brackets <>.  Example: <Mary>. Please use the hints to write a detailed description of what
- the movie is about. As needed, create additional characters.  Use only first names for the characters in the decription and include the names in angle brackets <>.  Example <Robert>.
- Be sure the character names are enclosed in angle brackets <> ";
+            string systemPrompt = "";
+            string userPrompt = "";
+
+            if (model == "gpt-3.5-turbo")
+            {
+                systemPrompt = "you are a helpful assitant.  You are working with a movie screenwriteer to help write a movie script.";
+                userPrompt = @" We are working on a movie script.  Below will be some hints about the movie.  Do not provide a title for the movie. 
+ In the hints character names will be enclosed in angle brackets <>.  Example: <Mary>. Please use the hints to write a detailed description of what
+ the movie is about.  As needed, create additional characters. 
+ In the output use first names for the characters and for every occurance of a character's name, always enclose the character names within angle brackets, example <Sally>. ";
+                userPrompt += "Here are the hints to use for writing movie description: ";
+                userPrompt += input;
+            }
+            else if (model == "gpt-4")
+
+            {
+                systemPrompt = @" We are working on a movie script.  Below will be some hints about the movie.  Do not provide a title for the movie. 
+ In the hints character names will be enclosed in angle brackets <>.  Example: <Mary>. Please use the hints to write a detailed description of what
+ the movie is about.  As needed, create additional characters. 
+ In the output use first names for the characters and always enclose the character names within angle brackets, example <Sally>. ";
+                userPrompt = input;
+            }
+
+            else 
+            
+            {
+                Console.WriteLine("Bad model");
+                Application.Exit();
+
+            }
+            
 
 
             var chat = api.Chat.CreateConversation();
@@ -41,46 +69,51 @@ namespace ScriptHelper
 
             // chat.RequestParameters.Model = ;
             chat.RequestParameters.MaxTokens = 500;
-            string x = chat.RequestParameters.Model.ToString();
+            
             /// give instruction as System
             chat.AppendSystemMessage(systemPrompt);
 
-            chat.AppendUserInput(input);
+            chat.AppendUserInput(userPrompt);
             
             string response = await chat.GetResponseFromChatbotAsync();
 
             return response;     
         }
 
-        public static async Task<string> makeMovieCompiledText(IOpenAIAPI api, string input, string model)
-        {
-            string systemPrompt = @" We are working on a movie script.  The user prompt will be a long form description
-of the movie. Please compress the description but do so in a way that will allow you to understand every detail in it.
-It should consist of English words with spaces between them, but need not contain punctuation or be grammatically correct. 
-It does not need to be easily human readbable. Enclose the compressed description in square brackets like these []. ";
-
-            var chat = api.Chat.CreateConversation();
-            chat.RequestParameters.Model = model;
-            // chat.RequestParameters.Model = "gpt-3.5-turbo";
-            chat.RequestParameters.MaxTokens = 500;
-            string x = chat.RequestParameters.Model.ToString();
-            /// give instruction as System
-            chat.AppendSystemMessage(systemPrompt);
-
-            chat.AppendUserInput(input);
-
-            string response = await chat.GetResponseFromChatbotAsync();
-
-            return response;
-        }
+       
 
         public static async Task<string> makeScenesFromMovieText(IOpenAIAPI api, string input, string model, int sceneKount)
         {
-            string systemPrompt = " We are working on a movie script.  The user prompt will provide a description of the movie.";
-            systemPrompt += " Please output " + sceneKount.ToString() + " scenes for the movie.";
-            systemPrompt += " Each scene should include a title and a description of the action in that scene enclosed. ";
-            systemPrompt += " Do not include scene numbers. Do not include any newlines.  Output as JSON list of lists with each of the inner list consisting of ";
-            systemPrompt +=   " first element in the inner list should be the title as a string.  The second element in the inner list should be the description as a string.";
+
+            string systemPrompt, userPrompt;
+            systemPrompt = "";
+            userPrompt = "";
+
+            if (model == "gpt-3.5-turbo")
+            {
+                systemPrompt = "you are a helpful assistant working with a screenwriter to develop a movie script";
+                userPrompt = " We are working on a movie script.  Below you will find a description of the movie.";
+                userPrompt += " Please output " + sceneKount.ToString() + " scenes for the movie.";
+                userPrompt += " Each scene should include a title and a description of the action in that scene. Do not include scene numbers.";
+                userPrompt += " In the description every occurance of every character name must be enclosed in angle brackets <>.  Example <Robert>.";
+                userPrompt += " Your output will be as a JSON list of lists.  Thew outer list will be a list of inner lists. Each of the inner lists consisting of two elements: ";
+                userPrompt += " The first element of each inner list is the title as a string.  The second element in the inner list is the description as a string.";
+                userPrompt += "Each scene description should be at least 2 sentences long.  This is the movie description to make into scenes: ";
+                userPrompt += input;
+
+
+
+            }
+            else if (model == "gpt-4")
+            {
+                systemPrompt = " We are working on a movie script.  The user prompt will provide a description of the movie.";
+                systemPrompt += " Please output " + sceneKount.ToString() + " scenes for the movie.";
+                systemPrompt += " Each scene should include a title and a description of the action in that scene. ";
+                systemPrompt += " In the description every occurance of a character's name must be enclosed in angle brackets <>.  Example <Robert>.";
+                systemPrompt += " Do not include scene numbers.  Your output will be as a JSON list of lists.  Thew outer list will be a list of inner lists. Each of the inner lists consisting of two elements: ";
+                systemPrompt += " The first element of each inner list is the title as a string.  The second element in the inner list is the description as a string.";
+                userPrompt = input;
+            }
 
 
 
@@ -91,28 +124,82 @@ It does not need to be easily human readbable. Enclose the compressed descriptio
 
             // chat.RequestParameters.Model = ;
             
-            string x = chat.RequestParameters.Model.ToString();
+            
             /// give instruction as System
             chat.AppendSystemMessage(systemPrompt);
 
-            chat.AppendUserInput(input);
+            chat.AppendUserInput(userPrompt);
 
             string response = await chat.GetResponseFromChatbotAsync();
 
             return response;
         }
-        public static async Task<string> makeSceneText(IOpenAIAPI api, string input, string model)
+        public static async Task<string> makeSceneText(IOpenAIAPI api, string model, MovieObj myMovie, List<SceneObj> sceneList, int sceneNum)
         {
-            string systemPrompt = @" We are working on a movie script.  The user prompt will be some hints about a scene in the movie.  Please use those hints to write a detailed description of what
-the scene is about. Do not provide any names for the characters.  Enclose the scene description in square brackets like these []. ";
+            string userPrompt = "";
+            string systemPrompt = @" You are an assistant helping a screenwriter write a movie script
+Your task will be take a scene hint that is provided in the user prompt and to write a detailed narrative description of the movie scene.
+
+Below is the movie synposis that describes the movie as a whole: \r\n";
+            systemPrompt += myMovie.movieText;
+
+            systemPrompt += "here are the scenes that come prior to the scene you will be writing:\r\n";
+
+            int sceneKount = 0;
+            string sceneKountStr;
+            foreach (SceneObj myScene in sceneList)
+            {
+                sceneKount += 1;
+                if (sceneKount < sceneNum)
+                {
+                    sceneKountStr = sceneKount.ToString();
+                    systemPrompt += $"Scene {sceneKountStr}:" + myScene.Title + "\r\n";
+                    systemPrompt += myScene.Description;
+
+                }
+                else
+                {
+                    break;
+                }
+                
+
+            }
+
+            userPrompt = "Be sure to add one space after sentences. ";
+            userPrompt += "Enclose all character names in angle brackets <>.  Example <Robert>. ";
+            userPrompt += "please write a detailed narrative scene description from this scene hint: " + sceneList[sceneNum - 1].Description;
+
 
 
             var chat = api.Chat.CreateConversation();
             chat.RequestParameters.Model = model;
 
             // chat.RequestParameters.Model = ;
-            chat.RequestParameters.MaxTokens = 500;
-            string x = chat.RequestParameters.Model.ToString();
+            chat.RequestParameters.MaxTokens = 3500;
+
+            /// give instruction as System
+            chat.AppendSystemMessage(systemPrompt);
+
+            chat.AppendUserInput(userPrompt);
+
+            string response = await chat.GetResponseFromChatbotAsync();
+
+            return response;
+        }
+        public static async Task<string> gptCompress(IOpenAIAPI api, string input, string model,int maxTokens)
+        {
+            string systemPrompt = @"compress the user prompt text such that you (GPT) 
+can reconstruct the intention of the human who wrote text with the full original intention. 
+This is for yourself. It does not need to be human readable or understandable. Abuse of language mixing, 
+abbreviations, symbols (unicode and emoji), or any other encodings or internal representations is all permissible, 
+so long as it, used in a future prompt will yield near-identical results as the original text:";
+
+
+            var chat = api.Chat.CreateConversation();
+            chat.RequestParameters.Model = model;
+                       
+            chat.RequestParameters.MaxTokens = maxTokens;
+            
             /// give instruction as System
             chat.AppendSystemMessage(systemPrompt);
 
@@ -121,7 +208,53 @@ the scene is about. Do not provide any names for the characters.  Enclose the sc
             string response = await chat.GetResponseFromChatbotAsync();
 
             return response;
+
         }
+
+        public static async Task<string> getTitle(IOpenAIAPI api, string input, string model)
+
+        {
+            string systemPrompt = @" We are working on a movie script.  The user prompt will be a descri[tion of the
+ movie.  Please return a title. ";
+
+            var chat = api.Chat.CreateConversation();
+            chat.RequestParameters.Model = model;
+
+            // chat.RequestParameters.Model = ;
+            chat.RequestParameters.MaxTokens = 50;
+            
+            /// give instruction as System
+            chat.AppendSystemMessage(systemPrompt);
+
+            chat.AppendUserInput(input);
+
+            string response = await chat.GetResponseFromChatbotAsync();
+            response = response.Replace("\"", "");
+            return response;
+        }
+
+        public static async Task<String> fixJSON(IOpenAIAPI api, string input, string model)
+        {
+            var chat = api.Chat.CreateConversation();
+            chat.RequestParameters.Model = model;
+
+            // chat.RequestParameters.Model = ;
+            chat.RequestParameters.MaxTokens = 2000;
+
+            /// give instruction as System
+
+            string systemPrompt = "you will repair the errors in the JSON file provided in the user prompt";
+            string userPrompt = input;
+
+            chat.AppendSystemMessage(systemPrompt);
+
+            chat.AppendUserInput(userPrompt);
+
+            string response = await chat.GetResponseFromChatbotAsync();
+            
+            return response;
+        }
+
 
     }
 }

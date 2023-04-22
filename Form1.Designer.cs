@@ -45,17 +45,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.MovieHintText = new System.Windows.Forms.TextBox();
             this.ScenesTab = new System.Windows.Forms.TabPage();
+            this.button6 = new System.Windows.Forms.Button();
+            this.SceneText = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.SceneHint = new System.Windows.Forms.TextBox();
+            this.SceneInScenesList = new System.Windows.Forms.ListBox();
             this.CharactersTab = new System.Windows.Forms.TabPage();
             this.Settings = new System.Windows.Forms.TabPage();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.SelectGPT35 = new System.Windows.Forms.RadioButton();
             this.SelectGPT4 = new System.Windows.Forms.RadioButton();
-            this.SceneInScenesList = new System.Windows.Forms.ListBox();
-            this.SceneHint = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.SceneText = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.MovieTitle = new System.Windows.Forms.Label();
+            this.ErrorMessage = new System.Windows.Forms.Label();
             this.Movie.SuspendLayout();
             this.MovieTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SceneCount)).BeginInit();
@@ -267,6 +270,59 @@
             this.ScenesTab.Text = "Scenes";
             this.ScenesTab.UseVisualStyleBackColor = true;
             // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.Location = new System.Drawing.Point(579, 194);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(218, 39);
+            this.button6.TabIndex = 4;
+            this.button6.Text = "Make Scene Text";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // SceneText
+            // 
+            this.SceneText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SceneText.Location = new System.Drawing.Point(579, 290);
+            this.SceneText.Multiline = true;
+            this.SceneText.Name = "SceneText";
+            this.SceneText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.SceneText.Size = new System.Drawing.Size(385, 227);
+            this.SceneText.TabIndex = 3;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(582, 15);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(113, 24);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Scene Hint";
+            // 
+            // SceneHint
+            // 
+            this.SceneHint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SceneHint.Location = new System.Drawing.Point(577, 38);
+            this.SceneHint.Multiline = true;
+            this.SceneHint.Name = "SceneHint";
+            this.SceneHint.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.SceneHint.Size = new System.Drawing.Size(379, 150);
+            this.SceneHint.TabIndex = 1;
+            this.SceneHint.TextChanged += new System.EventHandler(this.SceneHint_TextChanged);
+            // 
+            // SceneInScenesList
+            // 
+            this.SceneInScenesList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SceneInScenesList.FormattingEnabled = true;
+            this.SceneInScenesList.ItemHeight = 20;
+            this.SceneInScenesList.Location = new System.Drawing.Point(24, 18);
+            this.SceneInScenesList.Name = "SceneInScenesList";
+            this.SceneInScenesList.Size = new System.Drawing.Size(220, 404);
+            this.SceneInScenesList.TabIndex = 0;
+            this.SceneInScenesList.SelectedIndexChanged += new System.EventHandler(this.SceneInScenesList_SelectedIndexChanged);
+            // 
             // CharactersTab
             // 
             this.CharactersTab.Location = new System.Drawing.Point(4, 40);
@@ -290,9 +346,9 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(904, 661);
+            this.button4.Location = new System.Drawing.Point(1052, 662);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(178, 45);
+            this.button4.Size = new System.Drawing.Size(123, 45);
             this.button4.TabIndex = 9;
             this.button4.Text = "New Movie";
             this.button4.UseVisualStyleBackColor = true;
@@ -333,64 +389,45 @@
             this.SelectGPT4.UseVisualStyleBackColor = true;
             this.SelectGPT4.CheckedChanged += new System.EventHandler(this.SelectGPT4_CheckedChanged);
             // 
-            // SceneInScenesList
+            // button7
             // 
-            this.SceneInScenesList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SceneInScenesList.FormattingEnabled = true;
-            this.SceneInScenesList.ItemHeight = 20;
-            this.SceneInScenesList.Location = new System.Drawing.Point(24, 18);
-            this.SceneInScenesList.Name = "SceneInScenesList";
-            this.SceneInScenesList.Size = new System.Drawing.Size(220, 404);
-            this.SceneInScenesList.TabIndex = 0;
-            this.SceneInScenesList.SelectedIndexChanged += new System.EventHandler(this.SceneInScenesList_SelectedIndexChanged);
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.Location = new System.Drawing.Point(305, 662);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(122, 44);
+            this.button7.TabIndex = 10;
+            this.button7.Text = "Make Title";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // SceneHint
+            // MovieTitle
             // 
-            this.SceneHint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SceneHint.Location = new System.Drawing.Point(577, 38);
-            this.SceneHint.Multiline = true;
-            this.SceneHint.Name = "SceneHint";
-            this.SceneHint.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.SceneHint.Size = new System.Drawing.Size(379, 150);
-            this.SceneHint.TabIndex = 1;
-            this.SceneHint.TextChanged += new System.EventHandler(this.SceneHint_TextChanged);
+            this.MovieTitle.AutoSize = true;
+            this.MovieTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MovieTitle.Location = new System.Drawing.Point(459, 670);
+            this.MovieTitle.Name = "MovieTitle";
+            this.MovieTitle.Size = new System.Drawing.Size(46, 20);
+            this.MovieTitle.TabIndex = 11;
+            this.MovieTitle.Text = "Title: ";
             // 
-            // label6
+            // ErrorMessage
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(582, 15);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(113, 24);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Scene Hint";
-            // 
-            // SceneText
-            // 
-            this.SceneText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SceneText.Location = new System.Drawing.Point(579, 290);
-            this.SceneText.Multiline = true;
-            this.SceneText.Name = "SceneText";
-            this.SceneText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.SceneText.Size = new System.Drawing.Size(385, 227);
-            this.SceneText.TabIndex = 3;
-            // 
-            // button6
-            // 
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(579, 194);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(218, 39);
-            this.button6.TabIndex = 4;
-            this.button6.Text = "Make Scene Text";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.ErrorMessage.AutoSize = true;
+            this.ErrorMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ErrorMessage.Location = new System.Drawing.Point(57, 725);
+            this.ErrorMessage.Name = "ErrorMessage";
+            this.ErrorMessage.Size = new System.Drawing.Size(26, 24);
+            this.ErrorMessage.TabIndex = 12;
+            this.ErrorMessage.Text = "\"\"";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1198, 730);
+            this.ClientSize = new System.Drawing.Size(1198, 752);
+            this.Controls.Add(this.ErrorMessage);
+            this.Controls.Add(this.MovieTitle);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.SelectGPT4);
             this.Controls.Add(this.SelectGPT35);
             this.Controls.Add(this.button3);
@@ -440,6 +477,9 @@
         private System.Windows.Forms.TextBox SceneHint;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox SceneText;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label MovieTitle;
+        private System.Windows.Forms.Label ErrorMessage;
     }
 }
 

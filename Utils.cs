@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ScriptHelper
@@ -26,6 +27,10 @@ namespace ScriptHelper
             return "awaiting reponse from " + model + "\n";
 
 
+        }
+        public static string stripNonASCII(string input)
+        {
+            return Regex.Replace(input, @"[^\u0000-\u007F]+", "");
         }
     }
 }

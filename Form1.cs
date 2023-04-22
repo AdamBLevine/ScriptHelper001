@@ -11,6 +11,7 @@ using OpenAI_API;
 using OpenAI_API.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 namespace ScriptHelper
 {
@@ -25,7 +26,7 @@ namespace ScriptHelper
         List<SceneObj> scenesinscenes;
         SceneObj scene;
 
-        MovieObj movie;
+        MovieObj myMovie = new MovieObj();
 
         string gptModel = "gpt-3.5-turbo";
 
@@ -46,6 +47,10 @@ namespace ScriptHelper
             ScenesList.DisplayMember = "Title";
 
             MovieHintText.Text = makePrototypeMovieHint();
+            MovieText.Text = MovieHintText.Text;
+
+            myMovie.movieHintText = MovieHintText.Text;
+            myMovie.movieText = MovieHintText.Text;
 
             Movie.SelectedIndexChanged += Movie_SelectedIndexChanged;
 
@@ -112,9 +117,10 @@ namespace ScriptHelper
         private async void Button1_Click_1(object sender, EventArgs e)
         {
 
-            MovieText.Text = MovieHintText.Text + "\n \n " + gptModel + " awaiting reply...";
+            MovieText.Text = MovieHintText.Text + "\r\n \r\n" + gptModel + " awaiting reply...";
             string reply = await MyGPT.makeMovieText(api, MovieHintText.Text, gptModel);
             MovieText.Text = reply;
+            myMovie.movieText = reply;
 
         }
 
@@ -170,36 +176,69 @@ namespace ScriptHelper
 
             MovieTextCompiled.Text = Utils.makePendingMessage(gptModel);
 
-            string reply = await MyGPT.makeMovieCompiledText(api, MovieText.Text, gptModel);
+            string reply = await MyGPT.gptCompress  (api, MovieText.Text, gptModel,500);
 
-            MovieTextCompiled.Text = "model: " + gptModel + "\n" + reply;
-
+            MovieTextCompiled.Text = "model: " + gptModel + "+++ >" + reply;
+            myMovie.movieTextCompiled = reply;
 
         }
  
         private string makePrototypeMovieHint()
         {
-            string hint = @"a 19 year old man <Robert> meets a 39 year old married woman <Beth>, and they both fall in love.
- A passionate affair ensues, which ends tragically when her husband <Oscar> kills them both";
+            string hint = @"a 19 year old man <Robert> meets a 39 year old married woman <Beth>, and they both fall in love.  A passionate affair ensues.  <Beth> is married to <Oscar> a successful but cold and harsh 55 year old lawyer.    <Sally> the 12 year old daughter of <Beth> and <Oscar> knows about <Beth>'s affair with <Robert> and pleads with <Beth> to end it.  <Sally> warns <Beth> that <Oscar> is dangerous.   The affair ends tragically when <Oscar> kills <Robert> and <Beth>.  As a prominenet citizen and using his skills as a lawyer, <Oscar> is not suspected by the police and he gets away with the crime.  But <Sally> knows that he did it, and torments him for the rest of his life including on his death bed 20 years later. ";
             return hint;
         }
 
         private async void button5_Click(object sender, EventArgs e)
         {
+            List<List<string>> ListofLists = new List<List<string>>();
 
-            if (MovieText.Text.Length < 50)
-                { MessageBox.Show("Not Enough Movie Text.  Need at least 50 characters "); }
+            if (MovieText.Text.Length < 200)
+            { 
+                MessageBox.Show("Not Enough Movie Text.  Need at least 50 characters "); 
+            }
 
             else
             {
+            
                 SceneDescriptions.Clear();
                 SceneDescriptions.Text = Utils.makePendingMessage(gptModel);
-                SceneDescriptions.Text  =  await MyGPT.makeScenesFromMovieText(api, MovieText.Text, gptModel, (int)SceneCount.Value);
-                // var ListofList = JsonConvert.DeserializeObject(SceneDescriptions.Text);
-                var listOfLists = JsonConvert.DeserializeObject<List<List<string>>>(SceneDescriptions.Text);
+
+
+                bool looper = true;
+                int errorKount = 0;
+                string jsonString = "";
+                string originalJSONString = "";
+                jsonString = await MyGPT.makeScenesFromMovieText(api, MovieText.Text, gptModel, (int)SceneCount.Value);
+                originalJSONString = jsonString;
+                while (looper == true)
+                {
+                    try
+                    {
+                        
+                        ListofLists = JsonConvert.DeserializeObject<List<List<string>>>(jsonString);
+                        SceneDescriptions.Text = jsonString;
+                        looper = false;
+                    }
+
+                    catch (Exception ex)
+
+                    {
+                        errorKount += 1;
+                        if (errorKount > 5)
+                        {
+                            Application.Exit();
+                        }
+                        SceneDescriptions.Text = "error - trying to repair JSON. kount = " + errorKount.ToString();
+                        jsonString = await MyGPT.fixJSON(api, originalJSONString ,gptModel);
+                        looper = true;
+                    }
+                }
+                    
+                           
 
                 scenes = new List<SceneObj>();
-                foreach (List<string> myScene in listOfLists)
+                foreach (List<string> myScene in ListofLists)
                 {
 
                     SceneObj scene = new SceneObj();
@@ -233,11 +272,31 @@ namespace ScriptHelper
         private async void button6_Click(object sender, EventArgs e)
         {
             
-            SceneText.Text = SceneHint.Text + "  >> " + gptModel + " awaiting reply...";
-            string reply =   await MyGPT.makeSceneText(api, SceneHint.Text, gptModel);
+            SceneText.Text = SceneHint.Text + "\r\n \r\n " + gptModel + " awaiting reply...";
+            string reply =   await MyGPT.makeSceneText(api, gptModel,myMovie, scenes, SceneInScenesList.SelectedIndex + 1);
             SceneText.Text = reply;
 
             
+        }
+
+        private async void button7_Click(object sender, EventArgs e)
+        {
+            string reply;
+            
+            if (myMovie.movieText.Length > 200)
+            {
+                MovieTitle.Text = "making title from long...";
+                reply = await MyGPT.getTitle(api, myMovie.movieText, gptModel);
+                reply = "from long: " + reply;
+            }
+            else 
+            {
+                MovieTitle.Text = "making title from hint...";
+                reply = await MyGPT.getTitle(api, myMovie.movieHintText, gptModel);
+                reply = "from hint: " + reply;
+            }
+
+            MovieTitle.Text = reply;
         }
     }
 }
