@@ -298,5 +298,11 @@ namespace ScriptHelper
 
             MovieTitle.Text = reply;
         }
+
+        private async void button5_Click_1(object sender, EventArgs e)
+        {
+            BeatSheet.Text = "making beat sheet from scene descriptiom.... ";
+
+        }
     }
 }

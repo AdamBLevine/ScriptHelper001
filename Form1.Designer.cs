@@ -62,6 +62,9 @@
             this.Parameters = new System.Windows.Forms.TabPage();
             this.SentencesInSceneHint = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
+            this.BeatSheet = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.MakeBeatSheet = new System.Windows.Forms.Button();
             this.Movie.SuspendLayout();
             this.MovieTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SceneCount)).BeginInit();
@@ -264,6 +267,9 @@
             // 
             // ScenesTab
             // 
+            this.ScenesTab.Controls.Add(this.MakeBeatSheet);
+            this.ScenesTab.Controls.Add(this.label8);
+            this.ScenesTab.Controls.Add(this.BeatSheet);
             this.ScenesTab.Controls.Add(this.button6);
             this.ScenesTab.Controls.Add(this.SceneText);
             this.ScenesTab.Controls.Add(this.label6);
@@ -272,7 +278,7 @@
             this.ScenesTab.Location = new System.Drawing.Point(4, 40);
             this.ScenesTab.Name = "ScenesTab";
             this.ScenesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ScenesTab.Size = new System.Drawing.Size(1123, 575);
+            this.ScenesTab.Size = new System.Drawing.Size(1772, 575);
             this.ScenesTab.TabIndex = 1;
             this.ScenesTab.Text = "Scenes";
             this.ScenesTab.UseVisualStyleBackColor = true;
@@ -291,11 +297,11 @@
             // SceneText
             // 
             this.SceneText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SceneText.Location = new System.Drawing.Point(579, 290);
+            this.SceneText.Location = new System.Drawing.Point(579, 239);
             this.SceneText.Multiline = true;
             this.SceneText.Name = "SceneText";
             this.SceneText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.SceneText.Size = new System.Drawing.Size(385, 227);
+            this.SceneText.Size = new System.Drawing.Size(385, 278);
             this.SceneText.TabIndex = 3;
             // 
             // label6
@@ -324,9 +330,9 @@
             this.SceneInScenesList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SceneInScenesList.FormattingEnabled = true;
             this.SceneInScenesList.ItemHeight = 20;
-            this.SceneInScenesList.Location = new System.Drawing.Point(24, 18);
+            this.SceneInScenesList.Location = new System.Drawing.Point(25, 33);
             this.SceneInScenesList.Name = "SceneInScenesList";
-            this.SceneInScenesList.Size = new System.Drawing.Size(220, 404);
+            this.SceneInScenesList.Size = new System.Drawing.Size(220, 484);
             this.SceneInScenesList.TabIndex = 0;
             this.SceneInScenesList.SelectedIndexChanged += new System.EventHandler(this.SceneInScenesList_SelectedIndexChanged);
             // 
@@ -471,6 +477,36 @@
             this.label7.TabIndex = 1;
             this.label7.Text = "Sentences in Scene Hints";
             // 
+            // BeatSheet
+            // 
+            this.BeatSheet.Location = new System.Drawing.Point(279, 38);
+            this.BeatSheet.Multiline = true;
+            this.BeatSheet.Name = "BeatSheet";
+            this.BeatSheet.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.BeatSheet.Size = new System.Drawing.Size(283, 479);
+            this.BeatSheet.TabIndex = 5;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(284, 11);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(111, 24);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Beat Sheet";
+            // 
+            // MakeBeatSheet
+            // 
+            this.MakeBeatSheet.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MakeBeatSheet.Location = new System.Drawing.Point(577, 523);
+            this.MakeBeatSheet.Name = "MakeBeatSheet";
+            this.MakeBeatSheet.Size = new System.Drawing.Size(212, 42);
+            this.MakeBeatSheet.TabIndex = 7;
+            this.MakeBeatSheet.Text = "Make Beat Sheet";
+            this.MakeBeatSheet.UseVisualStyleBackColor = true;
+            this.MakeBeatSheet.Click += new System.EventHandler(this.button5_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -537,6 +573,9 @@
         private System.Windows.Forms.TabPage Parameters;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown SentencesInSceneHint;
+        private System.Windows.Forms.Button MakeBeatSheet;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox BeatSheet;
     }
 }
 
