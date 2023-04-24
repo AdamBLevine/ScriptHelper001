@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,10 @@ namespace ScriptHelper
 {
     public class MyGPT
     {
-        public static async Task<string> JimRutt(IOpenAIAPI api , string input, string model)
+        public static async Task<string> JimRutt(IOpenAIAPI api, string input, string model)
         {
 
-            
+
             var chat = api.Chat.CreateConversation();
             chat.RequestParameters.Model = model;
 
@@ -21,7 +22,7 @@ namespace ScriptHelper
             chat.AppendSystemMessage("You are a smart assistant");
 
             chat.AppendUserInput(input);
-           
+
 
             // and get the response
             string response = await chat.GetResponseFromChatbotAsync();
@@ -29,7 +30,7 @@ namespace ScriptHelper
             return response;
         }
 
-        public static async Task<string> makeMovieText(IOpenAIAPI api , string input, string model)
+        public static async Task<string> makeMovieText(IOpenAIAPI api, string input, string model)
         {
             string systemPrompt = "";
             string userPrompt = "";
@@ -54,14 +55,14 @@ namespace ScriptHelper
                 userPrompt = input;
             }
 
-            else 
-            
+            else
+
             {
                 Console.WriteLine("Bad model");
                 Application.Exit();
 
             }
-            
+
 
 
             var chat = api.Chat.CreateConversation();
@@ -69,18 +70,18 @@ namespace ScriptHelper
 
             // chat.RequestParameters.Model = ;
             chat.RequestParameters.MaxTokens = 500;
-            
+
             /// give instruction as System
             chat.AppendSystemMessage(systemPrompt);
 
             chat.AppendUserInput(userPrompt);
-            
+
             string response = await chat.GetResponseFromChatbotAsync();
 
-            return response;     
+            return response;
         }
 
-       
+
 
         public static async Task<string> makeScenesFromMovieText(IOpenAIAPI api, string input, string model, int sceneKount, int sentences)
         {
@@ -96,7 +97,7 @@ namespace ScriptHelper
                 userPrompt += " Please output " + sceneKount.ToString() + " scenes for the movie.";
                 userPrompt += " Each scene should include a title and a description of the action in that scene. Do not include scene numbers.";
                 userPrompt += " In the description every occurance of every character name must be enclosed in angle brackets <>.  Example <Robert>.";
-                
+
                 userPrompt += $"Each scene description should be at least {sentences} sentences long.  This is the movie description to make into scenes: ";
                 userPrompt += input;
                 userPrompt += " Your output will be JSON as a list of lists containing all of the scenes. In this form:";
@@ -124,8 +125,8 @@ namespace ScriptHelper
             chat.RequestParameters.MaxTokens = 3000;
 
             // chat.RequestParameters.Model = ;
-            
-            
+
+
             /// give instruction as System
             chat.AppendSystemMessage(systemPrompt);
 
@@ -162,7 +163,7 @@ Below is the movie synposis that describes the movie as a whole: \r\n";
                 {
                     break;
                 }
-                
+
 
             }
 
@@ -187,7 +188,7 @@ Below is the movie synposis that describes the movie as a whole: \r\n";
 
             return response;
         }
-        public static async Task<string> gptCompress(IOpenAIAPI api, string input, string model,int maxTokens)
+        public static async Task<string> gptCompress(IOpenAIAPI api, string input, string model, int maxTokens)
         {
             string systemPrompt = @"compress the user prompt text such that you (GPT) 
 can reconstruct the intention of the human who wrote text with the full original intention. 
@@ -198,9 +199,9 @@ so long as it, used in a future prompt will yield near-identical results as the 
 
             var chat = api.Chat.CreateConversation();
             chat.RequestParameters.Model = model;
-                       
+
             chat.RequestParameters.MaxTokens = maxTokens;
-            
+
             /// give instruction as System
             chat.AppendSystemMessage(systemPrompt);
 
@@ -223,7 +224,7 @@ so long as it, used in a future prompt will yield near-identical results as the 
 
             // chat.RequestParameters.Model = ;
             chat.RequestParameters.MaxTokens = 50;
-            
+
             /// give instruction as System
             chat.AppendSystemMessage(systemPrompt);
 
@@ -252,9 +253,73 @@ so long as it, used in a future prompt will yield near-identical results as the 
             chat.AppendUserInput(userPrompt);
 
             string response = await chat.GetResponseFromChatbotAsync();
-            
+
             return response;
         }
+
+        public static async Task<string> makeBeatSheet(IOpenAIAPI api, MovieObj myMovie,  string sceneText, string model)
+        {
+            string userPrompt = "";
+            string systemPrompt = " You are an assistant helping a screenwriter write a movie script";
+            systemPrompt += "Below is a synposis that describes the movie as a whole: \r\n";
+            systemPrompt += myMovie.movieText;
+
+            systemPrompt += "Your task will be create a beat sheet for the scene description in the user prompt.";
+            
+
+
+            
+
+            userPrompt = "Please write a beat sheet for the following scene description: \r\n";
+            
+            userPrompt += sceneText;
+            // userPrompt += "\r\n Please return the beat sheet as a list of strings in JSON format ";
+
+            var chat = api.Chat.CreateConversation();
+            chat.RequestParameters.Model = model;
+            chat.RequestParameters.MaxTokens = 1000;
+
+            chat.AppendSystemMessage(systemPrompt);
+
+            chat.AppendUserInput(userPrompt);
+
+            string response = await chat.GetResponseFromChatbotAsync();
+
+            return response;    
+        }
+
+        public static async Task<string> makeSceneScript(IOpenAIAPI api, MovieObj myMovie, string beatSheet, string model)
+        {
+            string userPrompt = "";
+            string systemPrompt = " You are an assistant helping a screenwriter write a movie script.";
+            systemPrompt += "Below is a synposis that describes the movie as a whole: \r\n";
+            systemPrompt += myMovie.movieText;
+
+            systemPrompt += "\r\n Your task will be write the scene script using the beat sheet in the user prompt.";
+
+
+
+            
+
+            userPrompt = "Please write a scene in screenplay format for the following beat sheet: \r\n";
+
+            userPrompt += beatSheet;
+            // userPrompt += "\r\n Please return the beat sheet as a list of strings in JSON format ";
+
+            var chat = api.Chat.CreateConversation();
+            chat.RequestParameters.Model = model;
+            chat.RequestParameters.MaxTokens = 2000;
+
+            chat.AppendSystemMessage(systemPrompt);
+
+            chat.AppendUserInput(userPrompt);
+
+            string response = await chat.GetResponseFromChatbotAsync();
+
+            return response;
+        }
+
+
 
 
     }

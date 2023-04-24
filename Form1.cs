@@ -301,8 +301,27 @@ namespace ScriptHelper
 
         private async void button5_Click_1(object sender, EventArgs e)
         {
-            BeatSheet.Text = "making beat sheet from scene descriptiom.... ";
+            if (SceneText.Text.Length > 50)
+            {
+                BeatSheet.Text = "making beat sheet from scene descriptiom.... ";
+                BeatSheet.Text = await MyGPT.makeBeatSheet(api, myMovie, SceneText.Text, gptModel);
+            }
+            else
+            {
+                MessageBox.Show("Not Enough Scene Text.  Need at least 50 characters ");
+            }
+        }
 
+        private async void button5_Click_2(object sender, EventArgs e)
+        {
+            if (BeatSheet.Text.Length > 50)
+            {
+                SceneScriptRichTextbox.Text = await MyGPT.makeSceneScript(api, myMovie, BeatSheet.Text, gptModel);
+            }
+            else
+            {
+                MessageBox.Show("Not Enough Beat Sheet.  Need at least 50 characters ");
+            }
         }
     }
 }

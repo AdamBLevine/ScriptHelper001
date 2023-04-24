@@ -65,6 +65,9 @@
             this.BeatSheet = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.MakeBeatSheet = new System.Windows.Forms.Button();
+            this.WriteSceneBtn = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.SceneScriptRichTextbox = new System.Windows.Forms.RichTextBox();
             this.Movie.SuspendLayout();
             this.MovieTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SceneCount)).BeginInit();
@@ -267,6 +270,9 @@
             // 
             // ScenesTab
             // 
+            this.ScenesTab.Controls.Add(this.SceneScriptRichTextbox);
+            this.ScenesTab.Controls.Add(this.label9);
+            this.ScenesTab.Controls.Add(this.WriteSceneBtn);
             this.ScenesTab.Controls.Add(this.MakeBeatSheet);
             this.ScenesTab.Controls.Add(this.label8);
             this.ScenesTab.Controls.Add(this.BeatSheet);
@@ -341,7 +347,7 @@
             this.CharactersTab.Location = new System.Drawing.Point(4, 40);
             this.CharactersTab.Name = "CharactersTab";
             this.CharactersTab.Padding = new System.Windows.Forms.Padding(3);
-            this.CharactersTab.Size = new System.Drawing.Size(1123, 575);
+            this.CharactersTab.Size = new System.Drawing.Size(1772, 575);
             this.CharactersTab.TabIndex = 2;
             this.CharactersTab.Text = "Characters";
             this.CharactersTab.UseVisualStyleBackColor = true;
@@ -351,7 +357,7 @@
             this.Locations.Location = new System.Drawing.Point(4, 40);
             this.Locations.Name = "Locations";
             this.Locations.Padding = new System.Windows.Forms.Padding(3);
-            this.Locations.Size = new System.Drawing.Size(1123, 575);
+            this.Locations.Size = new System.Drawing.Size(1772, 575);
             this.Locations.TabIndex = 3;
             this.Locations.Text = "Locations";
             this.Locations.UseVisualStyleBackColor = true;
@@ -439,7 +445,7 @@
             this.Parameters.Controls.Add(this.SentencesInSceneHint);
             this.Parameters.Location = new System.Drawing.Point(4, 40);
             this.Parameters.Name = "Parameters";
-            this.Parameters.Size = new System.Drawing.Size(1123, 575);
+            this.Parameters.Size = new System.Drawing.Size(1772, 575);
             this.Parameters.TabIndex = 5;
             this.Parameters.Text = "Parameters";
             this.Parameters.UseVisualStyleBackColor = true;
@@ -479,6 +485,7 @@
             // 
             // BeatSheet
             // 
+            this.BeatSheet.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BeatSheet.Location = new System.Drawing.Point(279, 38);
             this.BeatSheet.Multiline = true;
             this.BeatSheet.Name = "BeatSheet";
@@ -506,6 +513,36 @@
             this.MakeBeatSheet.Text = "Make Beat Sheet";
             this.MakeBeatSheet.UseVisualStyleBackColor = true;
             this.MakeBeatSheet.Click += new System.EventHandler(this.button5_Click_1);
+            // 
+            // WriteSceneBtn
+            // 
+            this.WriteSceneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WriteSceneBtn.Location = new System.Drawing.Point(284, 526);
+            this.WriteSceneBtn.Name = "WriteSceneBtn";
+            this.WriteSceneBtn.Size = new System.Drawing.Size(225, 38);
+            this.WriteSceneBtn.TabIndex = 8;
+            this.WriteSceneBtn.Text = "Write Scene";
+            this.WriteSceneBtn.UseVisualStyleBackColor = true;
+            this.WriteSceneBtn.Click += new System.EventHandler(this.button5_Click_2);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(1016, 11);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(129, 24);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "Scene Script";
+            // 
+            // SceneScriptRichTextbox
+            // 
+            this.SceneScriptRichTextbox.Location = new System.Drawing.Point(1013, 50);
+            this.SceneScriptRichTextbox.Name = "SceneScriptRichTextbox";
+            this.SceneScriptRichTextbox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.SceneScriptRichTextbox.Size = new System.Drawing.Size(513, 466);
+            this.SceneScriptRichTextbox.TabIndex = 11;
+            this.SceneScriptRichTextbox.Text = "";
             // 
             // Form1
             // 
@@ -576,6 +613,9 @@
         private System.Windows.Forms.Button MakeBeatSheet;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox BeatSheet;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button WriteSceneBtn;
+        private System.Windows.Forms.RichTextBox SceneScriptRichTextbox;
     }
 }
 
