@@ -60,19 +60,19 @@
             this.MovieTitle = new System.Windows.Forms.Label();
             this.ErrorMessage = new System.Windows.Forms.Label();
             this.Parameters = new System.Windows.Forms.TabPage();
-            this.SentencesInSceneHint = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.MakeBeatSheet = new System.Windows.Forms.Button();
             this.WriteSceneBtn = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.SceneScriptRichTextbox = new System.Windows.Forms.RichTextBox();
             this.BeatSheetRichTextbox = new System.Windows.Forms.RichTextBox();
+            this.SentencesInSceneHint = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.Movie.SuspendLayout();
             this.MovieTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SceneCount)).BeginInit();
             this.ScenesTab.SuspendLayout();
-            this.Parameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SentencesInSceneHint)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,6 +92,9 @@
             // 
             // MovieTab
             // 
+            this.MovieTab.Controls.Add(this.label10);
+            this.MovieTab.Controls.Add(this.label7);
+            this.MovieTab.Controls.Add(this.SentencesInSceneHint);
             this.MovieTab.Controls.Add(this.label5);
             this.MovieTab.Controls.Add(this.SceneDescriptions);
             this.MovieTab.Controls.Add(this.SceneCount);
@@ -137,7 +140,7 @@
             // SceneCount
             // 
             this.SceneCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SceneCount.Location = new System.Drawing.Point(24, 535);
+            this.SceneCount.Location = new System.Drawing.Point(24, 508);
             this.SceneCount.Name = "SceneCount";
             this.SceneCount.Size = new System.Drawing.Size(69, 29);
             this.SceneCount.TabIndex = 13;
@@ -150,7 +153,7 @@
             // MakeSceneList
             // 
             this.MakeSceneList.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MakeSceneList.Location = new System.Drawing.Point(24, 484);
+            this.MakeSceneList.Location = new System.Drawing.Point(24, 465);
             this.MakeSceneList.Name = "MakeSceneList";
             this.MakeSceneList.Size = new System.Drawing.Size(183, 40);
             this.MakeSceneList.TabIndex = 12;
@@ -309,6 +312,7 @@
             this.SceneText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.SceneText.Size = new System.Drawing.Size(385, 278);
             this.SceneText.TabIndex = 3;
+            this.SceneText.TextChanged += new System.EventHandler(this.SceneText_TextChanged);
             // 
             // label6
             // 
@@ -441,47 +445,12 @@
             // 
             // Parameters
             // 
-            this.Parameters.Controls.Add(this.label7);
-            this.Parameters.Controls.Add(this.SentencesInSceneHint);
             this.Parameters.Location = new System.Drawing.Point(4, 40);
             this.Parameters.Name = "Parameters";
             this.Parameters.Size = new System.Drawing.Size(1772, 575);
             this.Parameters.TabIndex = 5;
             this.Parameters.Text = "Parameters";
             this.Parameters.UseVisualStyleBackColor = true;
-            // 
-            // SentencesInSceneHint
-            // 
-            this.SentencesInSceneHint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SentencesInSceneHint.Location = new System.Drawing.Point(26, 32);
-            this.SentencesInSceneHint.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.SentencesInSceneHint.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.SentencesInSceneHint.Name = "SentencesInSceneHint";
-            this.SentencesInSceneHint.Size = new System.Drawing.Size(29, 26);
-            this.SentencesInSceneHint.TabIndex = 0;
-            this.SentencesInSceneHint.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(61, 34);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(217, 20);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Sentences in Scene Hints";
             // 
             // label8
             // 
@@ -545,6 +514,49 @@
             this.BeatSheetRichTextbox.TabIndex = 12;
             this.BeatSheetRichTextbox.Text = "";
             // 
+            // SentencesInSceneHint
+            // 
+            this.SentencesInSceneHint.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SentencesInSceneHint.Location = new System.Drawing.Point(24, 543);
+            this.SentencesInSceneHint.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.SentencesInSceneHint.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.SentencesInSceneHint.Name = "SentencesInSceneHint";
+            this.SentencesInSceneHint.Size = new System.Drawing.Size(69, 29);
+            this.SentencesInSceneHint.TabIndex = 16;
+            this.SentencesInSceneHint.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(98, 540);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(109, 24);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Sentences";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(99, 508);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(80, 24);
+            this.label10.TabIndex = 18;
+            this.label10.Text = "Scenes";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -567,8 +579,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.SceneCount)).EndInit();
             this.ScenesTab.ResumeLayout(false);
             this.ScenesTab.PerformLayout();
-            this.Parameters.ResumeLayout(false);
-            this.Parameters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SentencesInSceneHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -609,14 +619,15 @@
         private System.Windows.Forms.Label MovieTitle;
         private System.Windows.Forms.Label ErrorMessage;
         private System.Windows.Forms.TabPage Parameters;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.NumericUpDown SentencesInSceneHint;
         private System.Windows.Forms.Button MakeBeatSheet;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button WriteSceneBtn;
         private System.Windows.Forms.RichTextBox SceneScriptRichTextbox;
         private System.Windows.Forms.RichTextBox BeatSheetRichTextbox;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown SentencesInSceneHint;
     }
 }
 

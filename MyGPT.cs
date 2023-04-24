@@ -291,20 +291,21 @@ The beat sheet is organized in a linear or chronological order.";
             return response;    
         }
 
-        public static async Task<string> makeSceneScript(IOpenAIAPI api, MovieObj myMovie, string beatSheet, string model)
+        public static async Task<string> makeSceneScript(IOpenAIAPI api, MovieObj myMovie, string beatSheet, string sceneText, string model)
         {
             string userPrompt = "";
             string systemPrompt = " You are an assistant helping a screenwriter write a movie script.";
             systemPrompt += "Below is a synposis that describes the movie as a whole: \r\n";
             systemPrompt += myMovie.movieText;
-
+            systemPrompt += "Below is a detailed scene description. \r\n";
+            systemPrompt += sceneText;
             systemPrompt += "\r\n Your task will be write the script for one scene using the scene beat sheet in the user prompt.";
 
 
 
             
 
-            userPrompt = "Please write a scene in screenplay format fron the following scene beat sheet: \r\n";
+            userPrompt = "Please write a scene in screenplay format from the scene description and from the following scene beat sheet: \r\n";
 
             userPrompt += beatSheet;
             // userPrompt += "\r\n Please return the beat sheet as a list of strings in JSON format ";

@@ -316,12 +316,17 @@ namespace ScriptHelper
         {
             if (BeatSheetRichTextbox.Text.Length > 50)
             {
-                SceneScriptRichTextbox.Text = await MyGPT.makeSceneScript(api, myMovie, BeatSheetRichTextbox.Text, gptModel);
+                SceneScriptRichTextbox.Text = await MyGPT.makeSceneScript(api, myMovie, BeatSheetRichTextbox.Text, SceneText.Text,  gptModel);
             }
             else
             {
                 MessageBox.Show("Not Enough Beat Sheet.  Need at least 50 characters ");
             }
+        }
+
+        private void SceneText_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
