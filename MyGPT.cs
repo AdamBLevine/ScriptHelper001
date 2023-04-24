@@ -265,12 +265,15 @@ so long as it, used in a future prompt will yield near-identical results as the 
             systemPrompt += myMovie.movieText;
 
             systemPrompt += "Your task will be create a beat sheet for the scene description in the user prompt.";
-            
 
 
-            
 
-            userPrompt = "Please write a beat sheet for the following scene description: \r\n";
+            userPrompt = @"A beat sheet  breaks down a scene into a 
+series of beats or moments that are essential for moving the plot forward. These beats can include 
+character introductions, important decisions, emotional turning points, conflicts, and resolutions.
+The beat sheet is organized in a linear or chronological order.";
+
+            userPrompt = "\r\n Please write a beat sheet for the following scene description: \r\n";
             
             userPrompt += sceneText;
             // userPrompt += "\r\n Please return the beat sheet as a list of strings in JSON format ";

@@ -303,8 +303,8 @@ namespace ScriptHelper
         {
             if (SceneText.Text.Length > 50)
             {
-                BeatSheet.Text = "making beat sheet from scene descriptiom.... ";
-                BeatSheet.Text = await MyGPT.makeBeatSheet(api, myMovie, SceneText.Text, gptModel);
+                BeatSheetRichTextbox.Text = "making beat sheet from scene descriptiom.... ";
+                BeatSheetRichTextbox.Text = await MyGPT.makeBeatSheet(api, myMovie, SceneText.Text, gptModel);
             }
             else
             {
@@ -314,9 +314,9 @@ namespace ScriptHelper
 
         private async void button5_Click_2(object sender, EventArgs e)
         {
-            if (BeatSheet.Text.Length > 50)
+            if (BeatSheetRichTextbox.Text.Length > 50)
             {
-                SceneScriptRichTextbox.Text = await MyGPT.makeSceneScript(api, myMovie, BeatSheet.Text, gptModel);
+                SceneScriptRichTextbox.Text = await MyGPT.makeSceneScript(api, myMovie, BeatSheetRichTextbox.Text, gptModel);
             }
             else
             {

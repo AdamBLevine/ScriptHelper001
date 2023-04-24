@@ -62,12 +62,12 @@
             this.Parameters = new System.Windows.Forms.TabPage();
             this.SentencesInSceneHint = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
-            this.BeatSheet = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.MakeBeatSheet = new System.Windows.Forms.Button();
             this.WriteSceneBtn = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.SceneScriptRichTextbox = new System.Windows.Forms.RichTextBox();
+            this.BeatSheetRichTextbox = new System.Windows.Forms.RichTextBox();
             this.Movie.SuspendLayout();
             this.MovieTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SceneCount)).BeginInit();
@@ -270,12 +270,12 @@
             // 
             // ScenesTab
             // 
+            this.ScenesTab.Controls.Add(this.BeatSheetRichTextbox);
             this.ScenesTab.Controls.Add(this.SceneScriptRichTextbox);
             this.ScenesTab.Controls.Add(this.label9);
             this.ScenesTab.Controls.Add(this.WriteSceneBtn);
             this.ScenesTab.Controls.Add(this.MakeBeatSheet);
             this.ScenesTab.Controls.Add(this.label8);
-            this.ScenesTab.Controls.Add(this.BeatSheet);
             this.ScenesTab.Controls.Add(this.button6);
             this.ScenesTab.Controls.Add(this.SceneText);
             this.ScenesTab.Controls.Add(this.label6);
@@ -483,16 +483,6 @@
             this.label7.TabIndex = 1;
             this.label7.Text = "Sentences in Scene Hints";
             // 
-            // BeatSheet
-            // 
-            this.BeatSheet.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BeatSheet.Location = new System.Drawing.Point(279, 38);
-            this.BeatSheet.Multiline = true;
-            this.BeatSheet.Name = "BeatSheet";
-            this.BeatSheet.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.BeatSheet.Size = new System.Drawing.Size(283, 479);
-            this.BeatSheet.TabIndex = 5;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -537,12 +527,23 @@
             // 
             // SceneScriptRichTextbox
             // 
-            this.SceneScriptRichTextbox.Location = new System.Drawing.Point(1013, 50);
+            this.SceneScriptRichTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SceneScriptRichTextbox.Location = new System.Drawing.Point(1013, 39);
             this.SceneScriptRichTextbox.Name = "SceneScriptRichTextbox";
             this.SceneScriptRichTextbox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.SceneScriptRichTextbox.Size = new System.Drawing.Size(513, 466);
+            this.SceneScriptRichTextbox.Size = new System.Drawing.Size(513, 477);
             this.SceneScriptRichTextbox.TabIndex = 11;
             this.SceneScriptRichTextbox.Text = "";
+            // 
+            // BeatSheetRichTextbox
+            // 
+            this.BeatSheetRichTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BeatSheetRichTextbox.Location = new System.Drawing.Point(287, 39);
+            this.BeatSheetRichTextbox.Name = "BeatSheetRichTextbox";
+            this.BeatSheetRichTextbox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.BeatSheetRichTextbox.Size = new System.Drawing.Size(255, 476);
+            this.BeatSheetRichTextbox.TabIndex = 12;
+            this.BeatSheetRichTextbox.Text = "";
             // 
             // Form1
             // 
@@ -612,10 +613,10 @@
         private System.Windows.Forms.NumericUpDown SentencesInSceneHint;
         private System.Windows.Forms.Button MakeBeatSheet;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox BeatSheet;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button WriteSceneBtn;
         private System.Windows.Forms.RichTextBox SceneScriptRichTextbox;
+        private System.Windows.Forms.RichTextBox BeatSheetRichTextbox;
     }
 }
 
