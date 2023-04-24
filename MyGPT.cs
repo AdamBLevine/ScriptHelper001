@@ -82,7 +82,7 @@ namespace ScriptHelper
 
        
 
-        public static async Task<string> makeScenesFromMovieText(IOpenAIAPI api, string input, string model, int sceneKount)
+        public static async Task<string> makeScenesFromMovieText(IOpenAIAPI api, string input, string model, int sceneKount, int sentences)
         {
 
             string systemPrompt, userPrompt;
@@ -96,10 +96,11 @@ namespace ScriptHelper
                 userPrompt += " Please output " + sceneKount.ToString() + " scenes for the movie.";
                 userPrompt += " Each scene should include a title and a description of the action in that scene. Do not include scene numbers.";
                 userPrompt += " In the description every occurance of every character name must be enclosed in angle brackets <>.  Example <Robert>.";
-                userPrompt += " Your output will be as a JSON list of lists.  Thew outer list will be a list of inner lists. Each of the inner lists consisting of two elements: ";
-                userPrompt += " The first element of each inner list is the title as a string.  The second element in the inner list is the description as a string.";
-                userPrompt += "Each scene description should be at least 2 sentences long.  This is the movie description to make into scenes: ";
+                
+                userPrompt += $"Each scene description should be at least {sentences} sentences long.  This is the movie description to make into scenes: ";
                 userPrompt += input;
+                userPrompt += " Your output will be JSON as a list of lists containing all of the scenes. In this form:";
+                userPrompt += "[[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"]]";
 
 
 
@@ -166,8 +167,8 @@ Below is the movie synposis that describes the movie as a whole: \r\n";
             }
 
             userPrompt = "Be sure to add one space after sentences. ";
-            userPrompt += "Enclose all character names in angle brackets <>.  Example <Robert>. ";
-            userPrompt += "please write a detailed narrative scene description from this scene hint: " + sceneList[sceneNum - 1].Description;
+            userPrompt += "Enclose all names of persons or characters in angle brackets <>.  Example <Robert>. ";
+            userPrompt += "Please write a detailed narrative scene description from this scene hint: " + sceneList[sceneNum - 1].Description;
 
 
 
@@ -175,7 +176,7 @@ Below is the movie synposis that describes the movie as a whole: \r\n";
             chat.RequestParameters.Model = model;
 
             // chat.RequestParameters.Model = ;
-            chat.RequestParameters.MaxTokens = 3500;
+            chat.RequestParameters.MaxTokens = 500;
 
             /// give instruction as System
             chat.AppendSystemMessage(systemPrompt);
