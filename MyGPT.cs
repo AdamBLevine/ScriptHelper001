@@ -264,7 +264,7 @@ so long as it, used in a future prompt will yield near-identical results as the 
             systemPrompt += "Below is a synposis that describes the movie as a whole: \r\n";
             systemPrompt += myMovie.movieText;
 
-            systemPrompt += "Your task will be create a beat sheet for the scene description in the user prompt.";
+            systemPrompt += "Your task will be create a scene beat sheet for the scene description in the user prompt.";
 
 
 
@@ -298,13 +298,13 @@ The beat sheet is organized in a linear or chronological order.";
             systemPrompt += "Below is a synposis that describes the movie as a whole: \r\n";
             systemPrompt += myMovie.movieText;
 
-            systemPrompt += "\r\n Your task will be write the scene script using the beat sheet in the user prompt.";
+            systemPrompt += "\r\n Your task will be write the script for one scene using the scene beat sheet in the user prompt.";
 
 
 
             
 
-            userPrompt = "Please write a scene in screenplay format for the following beat sheet: \r\n";
+            userPrompt = "Please write a scene in screenplay format fron the following scene beat sheet: \r\n";
 
             userPrompt += beatSheet;
             // userPrompt += "\r\n Please return the beat sheet as a list of strings in JSON format ";

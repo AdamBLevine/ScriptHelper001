@@ -131,7 +131,7 @@
             this.SceneDescriptions.Multiline = true;
             this.SceneDescriptions.Name = "SceneDescriptions";
             this.SceneDescriptions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.SceneDescriptions.Size = new System.Drawing.Size(289, 253);
+            this.SceneDescriptions.Size = new System.Drawing.Size(289, 252);
             this.SceneDescriptions.TabIndex = 14;
             // 
             // SceneCount

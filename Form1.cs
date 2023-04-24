@@ -117,7 +117,7 @@ namespace ScriptHelper
         private async void Button1_Click_1(object sender, EventArgs e)
         {
 
-            MovieText.Text = MovieHintText.Text + "\r\n \r\n" + gptModel + " awaiting reply...";
+            MovieText.Text = gptModel + " awaiting reply...\r\n \r\n" + MovieHintText.Text;
             string reply = await MyGPT.makeMovieText(api, MovieHintText.Text, gptModel);
             MovieText.Text = reply;
             myMovie.movieText = reply;
