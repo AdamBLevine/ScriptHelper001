@@ -209,7 +209,7 @@ namespace ScriptHelper
                 int errorKount = 0;
                 string jsonString = "";
                 string originalJSONString = "";
-                jsonString = await MyGPT.makeScenesFromMovieText(api, MovieText.Text, gptModel, (int)SceneCount.Value,(int)SentencesInSceneHint.Value);
+                jsonString = await MyGPT.makeScenesFromMovieText(api, MovieText.Text, gptModel, (int)SceneCount.Value,(int)SentencesInSceneHint.Value,GPTError.Text);
                 originalJSONString = jsonString;
                 while (looper == true)
                 {
