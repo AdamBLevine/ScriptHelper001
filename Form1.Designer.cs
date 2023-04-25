@@ -392,7 +392,7 @@
             // WriteSceneBtn
             // 
             this.WriteSceneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WriteSceneBtn.Location = new System.Drawing.Point(379, 647);
+            this.WriteSceneBtn.Location = new System.Drawing.Point(1351, 647);
             this.WriteSceneBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.WriteSceneBtn.Name = "WriteSceneBtn";
             this.WriteSceneBtn.Size = new System.Drawing.Size(300, 47);
@@ -404,7 +404,7 @@
             // MakeBeatSheet
             // 
             this.MakeBeatSheet.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MakeBeatSheet.Location = new System.Drawing.Point(769, 644);
+            this.MakeBeatSheet.Location = new System.Drawing.Point(383, 641);
             this.MakeBeatSheet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MakeBeatSheet.Name = "MakeBeatSheet";
             this.MakeBeatSheet.Size = new System.Drawing.Size(283, 52);
@@ -427,7 +427,7 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(772, 239);
+            this.button6.Location = new System.Drawing.Point(761, 643);
             this.button6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(291, 48);
@@ -439,12 +439,12 @@
             // SceneText
             // 
             this.SceneText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SceneText.Location = new System.Drawing.Point(772, 294);
+            this.SceneText.Location = new System.Drawing.Point(761, 256);
             this.SceneText.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.SceneText.Multiline = true;
             this.SceneText.Name = "SceneText";
             this.SceneText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.SceneText.Size = new System.Drawing.Size(512, 341);
+            this.SceneText.Size = new System.Drawing.Size(512, 364);
             this.SceneText.TabIndex = 3;
             this.SceneText.TextChanged += new System.EventHandler(this.SceneText_TextChanged);
             // 

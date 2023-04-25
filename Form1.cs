@@ -316,6 +316,7 @@ namespace ScriptHelper
         {
             if (BeatSheetRichTextbox.Text.Length > 50)
             {
+                SceneScriptRichTextbox.Text = gptModel + " working on scene script....";
                 SceneScriptRichTextbox.Text = await MyGPT.makeSceneScript(api, myMovie, BeatSheetRichTextbox.Text, SceneText.Text,  gptModel);
             }
             else

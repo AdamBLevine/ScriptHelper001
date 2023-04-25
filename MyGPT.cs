@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,7 @@ namespace ScriptHelper
         {
             string systemPrompt = "";
             string userPrompt = "";
+            string errorMsg = "";
 
             if (model == "gpt-3.5-turbo")
             {
@@ -64,19 +66,7 @@ namespace ScriptHelper
             }
 
 
-
-            var chat = api.Chat.CreateConversation();
-            chat.RequestParameters.Model = model;
-
-            // chat.RequestParameters.Model = ;
-            chat.RequestParameters.MaxTokens = 500;
-
-            /// give instruction as System
-            chat.AppendSystemMessage(systemPrompt);
-
-            chat.AppendUserInput(userPrompt);
-
-            string response = await chat.GetResponseFromChatbotAsync();
+            string response = await UtilsGPT.doGPT(api, model, 500, .7, userPrompt, systemPrompt, errorMsg);
 
             return response;
         }
@@ -112,29 +102,15 @@ namespace ScriptHelper
                 systemPrompt += " Please output " + sceneKount.ToString() + " scenes for the movie.";
                 systemPrompt += " Each scene should include a title and a description of the action in that scene. ";
                 systemPrompt += " In the description every occurance of a character's name must be enclosed in angle brackets <>.  Example <Robert>.";
-                systemPrompt += " Do not include scene numbers.  Your output will be as a JSON list of lists.  Thew outer list will be a list of inner lists. Each of the inner lists consisting of two elements: ";
+                systemPrompt += " Do not include scene numbers.  Your output will be as a JSON list of lists.  Thee outer list will be a list of inner lists. Each of the inner lists consisting of two elements: ";
                 systemPrompt += " The first element of each inner list is the title as a string.  The second element in the inner list is the description as a string.";
                 userPrompt = input;
             }
 
 
-            string response = await UtilsGPT.doGPT(api, model, 3000, .7, userPrompt, systemPrompt, errorOut);
+            string response = await UtilsGPT.doGPT(api, model, 1500, .7, userPrompt, systemPrompt, errorOut);
 
-            /*
-            var chat = api.Chat.CreateConversation();
-            chat.RequestParameters.Model = model;
-            chat.RequestParameters.MaxTokens = 3000;
-
-            // chat.RequestParameters.Model = ;
-
-
-            /// give instruction as System
-            chat.AppendSystemMessage(systemPrompt);
-
-            chat.AppendUserInput(userPrompt);
-
-            string response = await chat.GetResponseFromChatbotAsync();
-            */
+           
 
 
             return response;
@@ -142,6 +118,7 @@ namespace ScriptHelper
         public static async Task<string> makeSceneText(IOpenAIAPI api, string model, MovieObj myMovie, List<SceneObj> sceneList, int sceneNum)
         {
             string userPrompt = "";
+            string  errorMsg = "";
             string systemPrompt = @" You are an assistant helping a screenwriter write a movie script
 Your task will be take a scene hint that is provided in the user prompt and to write a detailed narrative description of the movie scene.
 
@@ -159,7 +136,7 @@ Below is the movie synposis that describes the movie as a whole: \r\n";
                 {
                     sceneKountStr = sceneKount.ToString();
                     systemPrompt += $"Scene {sceneKountStr}:" + myScene.Title + "\r\n";
-                    systemPrompt += myScene.Description;
+                    systemPrompt += myScene.Description + "\r\n";
 
                 }
                 else
@@ -170,48 +147,30 @@ Below is the movie synposis that describes the movie as a whole: \r\n";
 
             }
 
-            userPrompt = "Be sure to add one space after sentences. ";
+            userPrompt = "Be sure to add one space after sentence. ";
             userPrompt += "Enclose all names of persons or characters in angle brackets <>.  Example <Robert>. ";
             userPrompt += "Please write a detailed narrative scene description from this scene hint: " + sceneList[sceneNum - 1].Description;
 
 
-
-            var chat = api.Chat.CreateConversation();
-            chat.RequestParameters.Model = model;
-
-            // chat.RequestParameters.Model = ;
-            chat.RequestParameters.MaxTokens = 500;
-
-            /// give instruction as System
-            chat.AppendSystemMessage(systemPrompt);
-
-            chat.AppendUserInput(userPrompt);
-
-            string response = await chat.GetResponseFromChatbotAsync();
-
+            string response = await UtilsGPT.doGPT(api, model, 500, .7, userPrompt, systemPrompt, errorMsg);
+                                   
             return response;
         }
         public static async Task<string> gptCompress(IOpenAIAPI api, string input, string model, int maxTokens)
         {
+
+            string errorMsg = "";
             string systemPrompt = @"compress the user prompt text such that you (GPT) 
 can reconstruct the intention of the human who wrote text with the full original intention. 
 This is for yourself. It does not need to be human readable or understandable. Abuse of language mixing, 
 abbreviations, symbols (unicode and emoji), or any other encodings or internal representations is all permissible, 
 so long as it, used in a future prompt will yield near-identical results as the original text:";
 
+            string userPrompt = input;
 
-            var chat = api.Chat.CreateConversation();
-            chat.RequestParameters.Model = model;
+            string response = await UtilsGPT.doGPT(api, model, maxTokens, .7, userPrompt, systemPrompt, errorMsg);
 
-            chat.RequestParameters.MaxTokens = maxTokens;
-
-            /// give instruction as System
-            chat.AppendSystemMessage(systemPrompt);
-
-            chat.AppendUserInput(input);
-
-            string response = await chat.GetResponseFromChatbotAsync();
-
+            
             return response;
 
         }
@@ -219,50 +178,31 @@ so long as it, used in a future prompt will yield near-identical results as the 
         public static async Task<string> getTitle(IOpenAIAPI api, string input, string model)
 
         {
-            string systemPrompt = @" We are working on a movie script.  The user prompt will be a descri[tion of the
+            string errorMsg = "";
+            string systemPrompt = @" We are working on a movie script.  The user prompt will be a description of the
  movie.  Please return a title. ";
-
-            var chat = api.Chat.CreateConversation();
-            chat.RequestParameters.Model = model;
-
-            // chat.RequestParameters.Model = ;
-            chat.RequestParameters.MaxTokens = 50;
-
-            /// give instruction as System
-            chat.AppendSystemMessage(systemPrompt);
-
-            chat.AppendUserInput(input);
-
-            string response = await chat.GetResponseFromChatbotAsync();
+            string userPrompt = input;
+            string response = await UtilsGPT.doGPT(api, model, 50, .7, userPrompt, systemPrompt, errorMsg);
             response = response.Replace("\"", "");
             return response;
         }
 
         public static async Task<String> fixJSON(IOpenAIAPI api, string input, string model)
         {
-            var chat = api.Chat.CreateConversation();
-            chat.RequestParameters.Model = model;
-
-            // chat.RequestParameters.Model = ;
-            chat.RequestParameters.MaxTokens = 2000;
-
-            /// give instruction as System
-
+            string errorMsg = "";
+            
             string systemPrompt = "you will repair the errors in the JSON file provided in the user prompt";
             string userPrompt = input;
-
-            chat.AppendSystemMessage(systemPrompt);
-
-            chat.AppendUserInput(userPrompt);
-
-            string response = await chat.GetResponseFromChatbotAsync();
-
+            
+            string response = await UtilsGPT.doGPT(api, model, 2000, .7, userPrompt, systemPrompt, errorMsg);
+            
             return response;
         }
 
         public static async Task<string> makeBeatSheet(IOpenAIAPI api, MovieObj myMovie,  string sceneText, string model)
         {
             string userPrompt = "";
+            string errorMsg = "";
             string systemPrompt = " You are an assistant helping a screenwriter write a movie script";
             systemPrompt += "Below is a synposis that describes the movie as a whole: \r\n";
             systemPrompt += myMovie.movieText;
@@ -274,28 +214,22 @@ so long as it, used in a future prompt will yield near-identical results as the 
             userPrompt = @"A beat sheet  breaks down a scene into a 
 series of beats or moments that are essential for moving the plot forward. These beats can include 
 character introductions, important decisions, emotional turning points, conflicts, and resolutions.
-The beat sheet is organized in a linear or chronological order.";
+The beat sheet is organized in a linear or chronological order. Do not include anyt Acts or Act numbers in the beat sheet";
 
             userPrompt = "\r\n Please write a beat sheet for the following scene description: \r\n";
             
             userPrompt += sceneText;
-            // userPrompt += "\r\n Please return the beat sheet as a list of strings in JSON format ";
 
-            var chat = api.Chat.CreateConversation();
-            chat.RequestParameters.Model = model;
-            chat.RequestParameters.MaxTokens = 1000;
 
-            chat.AppendSystemMessage(systemPrompt);
-
-            chat.AppendUserInput(userPrompt);
-
-            string response = await chat.GetResponseFromChatbotAsync();
+            string response = await UtilsGPT.doGPT(api, model, 1000, .7, userPrompt, systemPrompt, errorMsg);
+            // string response = await chat.GetResponseFromChatbotAsync();
 
             return response;    
         }
 
         public static async Task<string> makeSceneScript(IOpenAIAPI api, MovieObj myMovie, string beatSheet, string sceneText, string model)
         {
+            string errorMsg = "";
             string userPrompt = "";
             string systemPrompt = " You are an assistant helping a screenwriter write a movie script.";
             systemPrompt += "Below is a synposis that describes the movie as a whole: \r\n";
@@ -308,12 +242,15 @@ The beat sheet is organized in a linear or chronological order.";
 
             
 
-            userPrompt = "Please write a scene in screenplay format from the scene description and from the following scene beat sheet: \r\n";
-
-            userPrompt += beatSheet;
+            userPrompt = "Please write a scene in screenplay format from the scene description and from the following scene text: \r\n";
+            userPrompt += sceneText;
+            //userPrompt += beatSheet;
             // userPrompt += "\r\n Please return the beat sheet as a list of strings in JSON format ";
 
-            var chat = api.Chat.CreateConversation();
+
+            string response = await UtilsGPT.doGPT(api, model, 2000, .7, userPrompt, systemPrompt, errorMsg);
+            
+            /*var chat = api.Chat.CreateConversation();
             chat.RequestParameters.Model = model;
             chat.RequestParameters.MaxTokens = 2000;
 
@@ -321,7 +258,7 @@ The beat sheet is organized in a linear or chronological order.";
 
             chat.AppendUserInput(userPrompt);
 
-            string response = await chat.GetResponseFromChatbotAsync();
+            string response = await chat.GetResponseFromChatbotAsync(); */
 
             return response;
         }
