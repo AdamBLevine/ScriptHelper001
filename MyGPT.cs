@@ -83,7 +83,7 @@ namespace ScriptHelper
 
 
 
-        public static async Task<string> makeScenesFromMovieText(IOpenAIAPI api, string input, string model, int sceneKount, int sentences)
+        public static async Task<string> makeScenesFromMovieText(IOpenAIAPI api, string input, string model, int sceneKount, int sentences, string errorOut)
         {
 
             string systemPrompt, userPrompt;
@@ -118,8 +118,9 @@ namespace ScriptHelper
             }
 
 
+            string response = await UtilsGPT.doGPT(api, model, 3000, .7, userPrompt, systemPrompt, errorOut);
 
-
+            /*
             var chat = api.Chat.CreateConversation();
             chat.RequestParameters.Model = model;
             chat.RequestParameters.MaxTokens = 3000;
@@ -133,6 +134,8 @@ namespace ScriptHelper
             chat.AppendUserInput(userPrompt);
 
             string response = await chat.GetResponseFromChatbotAsync();
+            */
+
 
             return response;
         }

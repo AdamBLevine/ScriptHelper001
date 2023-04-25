@@ -229,7 +229,7 @@ namespace ScriptHelper
                         {
                             Application.Exit();
                         }
-                        SceneDescriptions.Text = "error - trying to repair JSON. kount = " + errorKount.ToString();
+                        SceneDescriptions.Text = "error - trying to repair JSON. kount = " + errorKount.ToString() +"\r\n" + originalJSONString;
                         jsonString = await MyGPT.fixJSON(api, originalJSONString ,gptModel);
                         looper = true;
                     }

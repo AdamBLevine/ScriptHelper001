@@ -99,6 +99,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UtilsGPT.cs" />
     <Compile Include="Scratch.cs" />
     <Compile Include="MovieObj.cs" />
     <Compile Include="SceneObj.cs" />
