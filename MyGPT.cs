@@ -83,6 +83,9 @@ namespace ScriptHelper
             if (model == "gpt-3.5-turbo")
             {
                 systemPrompt = "you are a helpful assistant working with a screenwriter to develop a movie script";
+                systemPrompt += " Your output will be in JSON as a list of lists containing all of the scenes. In this form:";
+                systemPrompt += "[[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"]]";
+
                 userPrompt = " We are working on a movie script.  Below you will find a description of the movie.";
                 userPrompt += " Please output " + sceneKount.ToString() + " scenes for the movie.";
                 userPrompt += " Each scene should include a title and a description of the action in that scene. Do not include scene numbers.";
@@ -90,7 +93,7 @@ namespace ScriptHelper
 
                 userPrompt += $"Each scene description should be at least {sentences} sentences long.  This is the movie description to make into scenes: ";
                 userPrompt += input;
-                userPrompt += " Your output will be JSON as a list of lists containing all of the scenes. In this form:";
+                userPrompt += " Your output will be in JSON as a list of lists containing all of the scenes. In this form:";
                 userPrompt += "[[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"]]";
 
 
@@ -242,9 +245,11 @@ The beat sheet is organized in a linear or chronological order. Do not include a
 
             
 
-            userPrompt = "Please write a scene in screenplay format from the scene description and from the following scene text: \r\n";
-            userPrompt += sceneText;
-            //userPrompt += beatSheet;
+            userPrompt = "Please write a scene in screenplay format from the scene description and beat sheat: \r\n";
+            userPrompt += "Scene decsription: " + sceneText;
+            userPrompt += "\r\n The beat sheet: ";
+            userPrompt += beatSheet;
+            
             // userPrompt += "\r\n Please return the beat sheet as a list of strings in JSON format ";
 
 

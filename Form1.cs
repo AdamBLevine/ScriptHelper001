@@ -176,17 +176,7 @@ namespace ScriptHelper
 
         }
 
-        private async void button2_Click(object sender, EventArgs e)
-        {
-
-            MovieTextCompiled.Text = Utils.makePendingMessage(gptModel);
-
-            string reply = await MyGPT.gptCompress  (api, MovieText.Text, gptModel,500);
-
-            MovieTextCompiled.Text = "model: " + gptModel + "+++ >" + reply;
-            myMovie.movieTextCompiled = reply;
-
-        }
+        
  
         private string makePrototypeMovieHint()
         {

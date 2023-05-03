@@ -68,6 +68,7 @@
             this.MovieTitle = new System.Windows.Forms.Label();
             this.ErrorMessage = new System.Windows.Forms.Label();
             this.GPTError = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.Movie.SuspendLayout();
             this.MovieTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SentencesInSceneHint)).BeginInit();
@@ -247,7 +248,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(748, 240);
+            this.button1.Location = new System.Drawing.Point(740, 239);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(285, 38);
@@ -502,7 +503,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(64, 815);
+            this.button3.Location = new System.Drawing.Point(63, 802);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(131, 52);
@@ -564,12 +565,13 @@
             // 
             this.ErrorMessage.AutoSize = true;
             this.ErrorMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ErrorMessage.Location = new System.Drawing.Point(1463, 888);
+            this.ErrorMessage.Location = new System.Drawing.Point(590, 868);
             this.ErrorMessage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ErrorMessage.Name = "ErrorMessage";
             this.ErrorMessage.Size = new System.Drawing.Size(31, 29);
             this.ErrorMessage.TabIndex = 12;
             this.ErrorMessage.Text = "\"\"";
+            this.ErrorMessage.Click += new System.EventHandler(this.ErrorMessage_Click);
             // 
             // GPTError
             // 
@@ -582,11 +584,22 @@
             this.GPTError.Text = "GPT Error";
             this.GPTError.Click += new System.EventHandler(this.GPTError_Click);
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(62, 868);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(131, 45);
+            this.button2.TabIndex = 14;
+            this.button2.Text = "Save";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2509, 926);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.GPTError);
             this.Controls.Add(this.ErrorMessage);
             this.Controls.Add(this.MovieTitle);
@@ -654,6 +667,7 @@
         private System.Windows.Forms.NumericUpDown SentencesInSceneHint;
         private System.Windows.Forms.Label GPTError;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button2;
     }
 }
 
