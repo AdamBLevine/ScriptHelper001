@@ -36,7 +36,7 @@ namespace ScriptHelper
             string systemPrompt = "";
             string userPrompt = "";
             string errorMsg = "";
-
+            
             if (model == "gpt-3.5-turbo")
             {
                 systemPrompt = "you are a helpful assitant.  You are working with a movie screenwriteer to help write a movie script.";
@@ -263,7 +263,14 @@ The beat sheet is organized in a linear or chronological order. Do not include a
             return response;
         }
 
+        public static void testLabel(Form1 myForm, string text)
+        {
 
+            myForm.UpdateLabelText(text);
+
+
+        }
+        
 
 
     }

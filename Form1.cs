@@ -60,7 +60,8 @@ namespace ScriptHelper
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            // UtilsGPT module = new UtilsGPT();
+            // module.UpdateError(this);
         }
 
         private void Movie_SelectedIndexChanged(object sender, EventArgs e)
@@ -117,11 +118,15 @@ namespace ScriptHelper
         private async void Button1_Click_1(object sender, EventArgs e)
         {
 
+            
+
+            
+            
             MovieText.Text = gptModel + " awaiting reply...\r\n \r\n" + MovieHintText.Text;
             string reply = await MyGPT.makeMovieText(api, MovieHintText.Text, gptModel);
             MovieText.Text = reply;
             myMovie.movieText = reply;
-
+            
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -328,6 +333,22 @@ namespace ScriptHelper
         private void SceneText_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        public void UpdateLabelText(string text)
+        {
+            MyGPT.testLabel(this, "test XXX");
+            Application.DoEvents();
+        }
+
+        private void GPTError_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click_3(object sender, EventArgs e)
+        {
+            MyGPT.testLabel(this,"test XXX");
         }
     }
 }
