@@ -30,6 +30,7 @@
         {
             this.Movie = new System.Windows.Forms.TabControl();
             this.MovieTab = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.SentencesInSceneHint = new System.Windows.Forms.NumericUpDown();
@@ -37,9 +38,6 @@
             this.SceneDescriptions = new System.Windows.Forms.TextBox();
             this.SceneCount = new System.Windows.Forms.NumericUpDown();
             this.MakeSceneList = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.MovieTextCompiled = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.ScenesList = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -70,7 +68,6 @@
             this.MovieTitle = new System.Windows.Forms.Label();
             this.ErrorMessage = new System.Windows.Forms.Label();
             this.GPTError = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
             this.Movie.SuspendLayout();
             this.MovieTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SentencesInSceneHint)).BeginInit();
@@ -103,9 +100,6 @@
             this.MovieTab.Controls.Add(this.SceneDescriptions);
             this.MovieTab.Controls.Add(this.SceneCount);
             this.MovieTab.Controls.Add(this.MakeSceneList);
-            this.MovieTab.Controls.Add(this.label4);
-            this.MovieTab.Controls.Add(this.MovieTextCompiled);
-            this.MovieTab.Controls.Add(this.button2);
             this.MovieTab.Controls.Add(this.label3);
             this.MovieTab.Controls.Add(this.ScenesList);
             this.MovieTab.Controls.Add(this.button1);
@@ -121,6 +115,16 @@
             this.MovieTab.TabIndex = 0;
             this.MovieTab.Text = "Movie";
             this.MovieTab.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(1486, 52);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(256, 100);
+            this.button5.TabIndex = 19;
+            this.button5.Text = "Test Label";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_3);
             // 
             // label10
             // 
@@ -172,7 +176,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(309, 330);
+            this.label5.Location = new System.Drawing.Point(312, 11);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(249, 29);
@@ -182,12 +186,12 @@
             // SceneDescriptions
             // 
             this.SceneDescriptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SceneDescriptions.Location = new System.Drawing.Point(308, 368);
+            this.SceneDescriptions.Location = new System.Drawing.Point(317, 52);
             this.SceneDescriptions.Margin = new System.Windows.Forms.Padding(4);
             this.SceneDescriptions.Multiline = true;
             this.SceneDescriptions.Name = "SceneDescriptions";
             this.SceneDescriptions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.SceneDescriptions.Size = new System.Drawing.Size(384, 309);
+            this.SceneDescriptions.Size = new System.Drawing.Size(384, 592);
             this.SceneDescriptions.TabIndex = 14;
             // 
             // SceneCount
@@ -215,40 +219,6 @@
             this.MakeSceneList.Text = "Make Scenes";
             this.MakeSceneList.UseVisualStyleBackColor = true;
             this.MakeSceneList.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(311, 27);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(184, 29);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Compiled Text";
-            // 
-            // MovieTextCompiled
-            // 
-            this.MovieTextCompiled.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MovieTextCompiled.Location = new System.Drawing.Point(308, 68);
-            this.MovieTextCompiled.Margin = new System.Windows.Forms.Padding(4);
-            this.MovieTextCompiled.Multiline = true;
-            this.MovieTextCompiled.Name = "MovieTextCompiled";
-            this.MovieTextCompiled.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.MovieTextCompiled.Size = new System.Drawing.Size(387, 242);
-            this.MovieTextCompiled.TabIndex = 10;
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(748, 652);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(147, 42);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Compile";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label3
             // 
@@ -612,16 +582,6 @@
             this.GPTError.Text = "GPT Error";
             this.GPTError.Click += new System.EventHandler(this.GPTError_Click);
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(1486, 52);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(256, 100);
-            this.button5.TabIndex = 19;
-            this.button5.Text = "Test Label";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click_3);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -667,12 +627,9 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ListBox ScenesList;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.RadioButton SelectGPT35;
         private System.Windows.Forms.RadioButton SelectGPT4;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox MovieTextCompiled;
         private System.Windows.Forms.Button MakeSceneList;
         private System.Windows.Forms.NumericUpDown SceneCount;
         private System.Windows.Forms.Label label5;
