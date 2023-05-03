@@ -30,7 +30,6 @@
         {
             this.Movie = new System.Windows.Forms.TabControl();
             this.MovieTab = new System.Windows.Forms.TabPage();
-            this.button5 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.SentencesInSceneHint = new System.Windows.Forms.NumericUpDown();
@@ -69,6 +68,9 @@
             this.ErrorMessage = new System.Windows.Forms.Label();
             this.GPTError = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.NotesForMovieText = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.ApplyMovieTextNote = new System.Windows.Forms.Button();
             this.Movie.SuspendLayout();
             this.MovieTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SentencesInSceneHint)).BeginInit();
@@ -93,7 +95,9 @@
             // 
             // MovieTab
             // 
-            this.MovieTab.Controls.Add(this.button5);
+            this.MovieTab.Controls.Add(this.ApplyMovieTextNote);
+            this.MovieTab.Controls.Add(this.label4);
+            this.MovieTab.Controls.Add(this.NotesForMovieText);
             this.MovieTab.Controls.Add(this.label10);
             this.MovieTab.Controls.Add(this.label7);
             this.MovieTab.Controls.Add(this.SentencesInSceneHint);
@@ -116,16 +120,6 @@
             this.MovieTab.TabIndex = 0;
             this.MovieTab.Text = "Movie";
             this.MovieTab.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(1486, 52);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(256, 100);
-            this.button5.TabIndex = 19;
-            this.button5.Text = "Test Label";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click_3);
             // 
             // label10
             // 
@@ -248,7 +242,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(740, 239);
+            this.button1.Location = new System.Drawing.Point(740, 397);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(285, 38);
@@ -263,7 +257,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(743, 303);
+            this.label2.Location = new System.Drawing.Point(1253, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(141, 29);
@@ -274,12 +268,12 @@
             // MovieText
             // 
             this.MovieText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MovieText.Location = new System.Drawing.Point(748, 336);
+            this.MovieText.Location = new System.Drawing.Point(1258, 34);
             this.MovieText.Margin = new System.Windows.Forms.Padding(4);
             this.MovieText.Multiline = true;
             this.MovieText.Name = "MovieText";
             this.MovieText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.MovieText.Size = new System.Drawing.Size(683, 308);
+            this.MovieText.Size = new System.Drawing.Size(683, 351);
             this.MovieText.TabIndex = 2;
             this.MovieText.TextChanged += new System.EventHandler(this.MovieHintText_TextChanged);
             // 
@@ -298,12 +292,12 @@
             // MovieHintText
             // 
             this.MovieHintText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MovieHintText.Location = new System.Drawing.Point(740, 44);
+            this.MovieHintText.Location = new System.Drawing.Point(740, 52);
             this.MovieHintText.Margin = new System.Windows.Forms.Padding(4);
             this.MovieHintText.Multiline = true;
             this.MovieHintText.Name = "MovieHintText";
             this.MovieHintText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.MovieHintText.Size = new System.Drawing.Size(691, 187);
+            this.MovieHintText.Size = new System.Drawing.Size(506, 316);
             this.MovieHintText.TabIndex = 0;
             this.MovieHintText.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
@@ -568,9 +562,8 @@
             this.ErrorMessage.Location = new System.Drawing.Point(590, 868);
             this.ErrorMessage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ErrorMessage.Name = "ErrorMessage";
-            this.ErrorMessage.Size = new System.Drawing.Size(31, 29);
+            this.ErrorMessage.Size = new System.Drawing.Size(0, 29);
             this.ErrorMessage.TabIndex = 12;
-            this.ErrorMessage.Text = "\"\"";
             this.ErrorMessage.Click += new System.EventHandler(this.ErrorMessage_Click);
             // 
             // GPTError
@@ -593,6 +586,36 @@
             this.button2.TabIndex = 14;
             this.button2.Text = "Save";
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // NotesForMovieText
+            // 
+            this.NotesForMovieText.Location = new System.Drawing.Point(1258, 449);
+            this.NotesForMovieText.Multiline = true;
+            this.NotesForMovieText.Name = "NotesForMovieText";
+            this.NotesForMovieText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.NotesForMovieText.Size = new System.Drawing.Size(683, 139);
+            this.NotesForMovieText.TabIndex = 19;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(1253, 417);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(264, 29);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Notes For Movie Text";
+            // 
+            // ApplyMovieTextNote
+            // 
+            this.ApplyMovieTextNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApplyMovieTextNote.Location = new System.Drawing.Point(1258, 603);
+            this.ApplyMovieTextNote.Name = "ApplyMovieTextNote";
+            this.ApplyMovieTextNote.Size = new System.Drawing.Size(186, 51);
+            this.ApplyMovieTextNote.TabIndex = 21;
+            this.ApplyMovieTextNote.Text = "Apply Note";
+            this.ApplyMovieTextNote.UseVisualStyleBackColor = true;
+            this.ApplyMovieTextNote.Click += new System.EventHandler(this.button5_Click_3);
             // 
             // Form1
             // 
@@ -666,8 +689,10 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown SentencesInSceneHint;
         private System.Windows.Forms.Label GPTError;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button ApplyMovieTextNote;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox NotesForMovieText;
     }
 }
 

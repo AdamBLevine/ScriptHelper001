@@ -12,7 +12,7 @@ namespace ScriptHelper
 {
     internal class UtilsGPT
     {
-        public static async Task<string> doGPT(IOpenAIAPI api, string model, int tokenMax, double temperature, string userPrompt, string systemPrompt,string errorOut)
+        public static async Task<string> doGPT(IOpenAIAPI api, string model, int tokenMax, double temperature, string userPrompt, string systemPrompt,string errorOut,Form1 myForm)
         {
             string errorMsg = "";
             string response = "";
@@ -37,7 +37,11 @@ namespace ScriptHelper
                 catch (Exception ex)
                 {
                     errorKount += 1;
+
                     errorMsg = "GPT busy error kount = " + errorKount.ToString();
+
+                    myForm.updateGPTErrorMsg(errorMsg);
+
                     Console.WriteLine(errorMsg);
                     
                     Thread.Sleep(750);
@@ -52,15 +56,7 @@ namespace ScriptHelper
 
         }
 
-        public static void testERROR(Form1 myForm)
-        {
-           myForm.UpdateLabelText("test XXX");
-        }
-        public static void UpdateError(string text)
-        {
-            Form1 form = new Form1();
-            form.UpdateLabelText(text);
-        }
-            
+        
+          
     }
 }

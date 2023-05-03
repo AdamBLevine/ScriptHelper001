@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenAI_API;
+using OpenAI_API.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace ScriptHelper
 {
@@ -31,7 +33,7 @@ namespace ScriptHelper
             return response;
         }
 
-        public static async Task<string> makeMovieText(IOpenAIAPI api, string input, string model)
+        public static async Task<string> makeMovieText(IOpenAIAPI api, string input, string model,Form1 myForm)
         {
             string systemPrompt = "";
             string userPrompt = "";
@@ -66,14 +68,14 @@ namespace ScriptHelper
             }
 
 
-            string response = await UtilsGPT.doGPT(api, model, 500, .7, userPrompt, systemPrompt, errorMsg);
+            string response = await UtilsGPT.doGPT(api, model, 500, .7, userPrompt, systemPrompt, errorMsg, myForm);
 
             return response;
         }
 
 
 
-        public static async Task<string> makeScenesFromMovieText(IOpenAIAPI api, string input, string model, int sceneKount, int sentences, string errorOut)
+        public static async Task<string> makeScenesFromMovieText(IOpenAIAPI api, string input, string model, int sceneKount, int sentences, string errorOut,Form1 myForm)
         {
 
             string systemPrompt, userPrompt;
@@ -111,14 +113,14 @@ namespace ScriptHelper
             }
 
 
-            string response = await UtilsGPT.doGPT(api, model, 1500, .7, userPrompt, systemPrompt, errorOut);
+            string response = await UtilsGPT.doGPT(api, model, 1500, .7, userPrompt, systemPrompt, errorOut,myForm);
 
            
 
 
             return response;
         }
-        public static async Task<string> makeSceneText(IOpenAIAPI api, string model, MovieObj myMovie, List<SceneObj> sceneList, int sceneNum)
+        public static async Task<string> makeSceneText(IOpenAIAPI api, string model, MovieObj myMovie, List<SceneObj> sceneList, int sceneNum,Form1 myForm)
         {
             string userPrompt = "";
             string  errorMsg = "";
@@ -155,11 +157,11 @@ Below is the movie synposis that describes the movie as a whole: \r\n";
             userPrompt += "Please write a detailed narrative scene description from this scene hint: " + sceneList[sceneNum - 1].Description;
 
 
-            string response = await UtilsGPT.doGPT(api, model, 500, .7, userPrompt, systemPrompt, errorMsg);
+            string response = await UtilsGPT.doGPT(api, model, 500, .7, userPrompt, systemPrompt, errorMsg, myForm);
                                    
             return response;
         }
-        public static async Task<string> gptCompress(IOpenAIAPI api, string input, string model, int maxTokens)
+        public static async Task<string> gptCompress(IOpenAIAPI api, string input, string model, int maxTokens,Form1 myForm)
         {
 
             string errorMsg = "";
@@ -171,38 +173,38 @@ so long as it, used in a future prompt will yield near-identical results as the 
 
             string userPrompt = input;
 
-            string response = await UtilsGPT.doGPT(api, model, maxTokens, .7, userPrompt, systemPrompt, errorMsg);
+            string response = await UtilsGPT.doGPT(api, model, maxTokens, .7, userPrompt, systemPrompt, errorMsg, myForm);
 
             
             return response;
 
         }
 
-        public static async Task<string> getTitle(IOpenAIAPI api, string input, string model)
+        public static async Task<string> getTitle(IOpenAIAPI api, string input, string model,Form1 myForm)
 
         {
             string errorMsg = "";
             string systemPrompt = @" We are working on a movie script.  The user prompt will be a description of the
  movie.  Please return a title. ";
             string userPrompt = input;
-            string response = await UtilsGPT.doGPT(api, model, 50, .7, userPrompt, systemPrompt, errorMsg);
+            string response = await UtilsGPT.doGPT(api, model, 50, .7, userPrompt, systemPrompt, errorMsg, myForm);
             response = response.Replace("\"", "");
             return response;
         }
 
-        public static async Task<String> fixJSON(IOpenAIAPI api, string input, string model)
+        public static async Task<String> fixJSON(IOpenAIAPI api, string input, string model, Form1 myForm )
         {
             string errorMsg = "";
             
             string systemPrompt = "you will repair the errors in the JSON file provided in the user prompt";
             string userPrompt = input;
             
-            string response = await UtilsGPT.doGPT(api, model, 2000, .7, userPrompt, systemPrompt, errorMsg);
+            string response = await UtilsGPT.doGPT(api, model, 2000, .7, userPrompt, systemPrompt, errorMsg, myForm);
             
             return response;
         }
 
-        public static async Task<string> makeBeatSheet(IOpenAIAPI api, MovieObj myMovie,  string sceneText, string model)
+        public static async Task<string> makeBeatSheet(IOpenAIAPI api, MovieObj myMovie,  string sceneText, string model,Form1 myForm)
         {
             string userPrompt = "";
             string errorMsg = "";
@@ -224,13 +226,13 @@ The beat sheet is organized in a linear or chronological order. Do not include a
             userPrompt += sceneText;
 
 
-            string response = await UtilsGPT.doGPT(api, model, 1000, .7, userPrompt, systemPrompt, errorMsg);
+            string response = await UtilsGPT.doGPT(api, model, 1000, .7, userPrompt, systemPrompt, errorMsg, myForm );
             // string response = await chat.GetResponseFromChatbotAsync();
 
             return response;    
         }
 
-        public static async Task<string> makeSceneScript(IOpenAIAPI api, MovieObj myMovie, string beatSheet, string sceneText, string model)
+        public static async Task<string> makeSceneScript(IOpenAIAPI api, MovieObj myMovie, string beatSheet, string sceneText, string model,Form1 myForm)
         {
             string errorMsg = "";
             string userPrompt = "";
@@ -253,7 +255,7 @@ The beat sheet is organized in a linear or chronological order. Do not include a
             // userPrompt += "\r\n Please return the beat sheet as a list of strings in JSON format ";
 
 
-            string response = await UtilsGPT.doGPT(api, model, 2000, .7, userPrompt, systemPrompt, errorMsg);
+            string response = await UtilsGPT.doGPT(api, model, 2000, .7, userPrompt, systemPrompt, errorMsg, myForm);
             
             /*var chat = api.Chat.CreateConversation();
             chat.RequestParameters.Model = model;
@@ -268,14 +270,25 @@ The beat sheet is organized in a linear or chronological order. Do not include a
             return response;
         }
 
-        public static void testLabel(Form1 myForm, string text)
+
+        public static async Task<string> NotesForMovieText(IOpenAIAPI api, string model, MovieObj myMovie, string textNote, Form1 myForm)
         {
+            string errorMsg = "";
+            string systemPrompt = " You are an assistant helping a screenwriter write a movie script. ";
+            systemPrompt += "In the user prompt you will be provided with a detailed narrative description of the movie.";
+            systemPrompt += " You will also be provided with \'notes\' which are instructions for rewriting the detailed narrative description of the movie. ";
+            systemPrompt += " You will rewrite the detailed narrative description of the movie taking into consideration the notes. ";
 
-            myForm.UpdateLabelText(text);
 
+            string userPrompt = "Here is the detailed narrative description of the movie: \r\n";
+            userPrompt += myMovie.movieText;
+            userPrompt += "\r\n Here are the notes to use for rewriting the detailed narrative description of the movie: \r\n ";
+            userPrompt += textNote;
+            userPrompt += " Please rewrite the detailed narrative description of the movie considering the notes";
+            string response = await UtilsGPT.doGPT(api, model, 2000, .7, userPrompt, systemPrompt, errorMsg, myForm);
 
+            return response;
         }
-        
 
 
     }

@@ -12,6 +12,7 @@ using OpenAI_API.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
+using System.Runtime.Remoting.Messaging;
 
 namespace ScriptHelper
 {
@@ -123,7 +124,7 @@ namespace ScriptHelper
             
             
             MovieText.Text = gptModel + " awaiting reply...\r\n \r\n" + MovieHintText.Text;
-            string reply = await MyGPT.makeMovieText(api, MovieHintText.Text, gptModel);
+            string reply = await MyGPT.makeMovieText(api, MovieHintText.Text, gptModel,this);
             MovieText.Text = reply;
             myMovie.movieText = reply;
             
@@ -180,7 +181,7 @@ namespace ScriptHelper
  
         private string makePrototypeMovieHint()
         {
-            string hint = @"a 19 year old man <Robert> meets a 39 year old married woman <Beth>, and they both fall in love.  A passionate affair ensues.  <Beth> is married to <Oscar> a successful but cold and harsh 55 year old lawyer.    <Sally> the 12 year old daughter of <Beth> and <Oscar> knows about <Beth>'s affair with <Robert> and pleads with <Beth> to end it.  <Sally> warns <Beth> that <Oscar> is dangerous.   The affair ends tragically when <Oscar> kills <Robert> and <Beth>.  As a prominenet citizen and using his skills as a lawyer, <Oscar> is not suspected by the police and he gets away with the crime.  But <Sally> knows that he did it, and torments him for the rest of his life including on his death bed 20 years later. ";
+            string hint = @"a 19 year old man <Robert> meets a 39 year old married woman <Beth>, and they both fall in love.  A passionate affair ensues.  <Beth> is married to <Oscar> a successful but cold and harsh 55 year old lawyer.    <Sally> the 12 year old daughter of <Beth> and <Oscar> knows about <Beth>'s affair with <Robert> and pleads with <Beth> to end it.  <Sally> warns <Beth> that <Oscar> is dangerous.   The affair ends tragically when <Oscar> kills <Robert> and <Beth>.  As a prominent citizen and using his skills as a lawyer, <Oscar> is not suspected by the police and he gets away with the crime.  But <Sally> knows that he did it, and torments him for the rest of his life including on his death bed 20 years later. ";
             return hint;
         }
 
@@ -204,7 +205,7 @@ namespace ScriptHelper
                 int errorKount = 0;
                 string jsonString = "";
                 string originalJSONString = "";
-                jsonString = await MyGPT.makeScenesFromMovieText(api, MovieText.Text, gptModel, (int)SceneCount.Value,(int)SentencesInSceneHint.Value,GPTError.Text);
+                jsonString = await MyGPT.makeScenesFromMovieText(api, MovieText.Text, gptModel, (int)SceneCount.Value,(int)SentencesInSceneHint.Value,GPTError.Text,this);
                 originalJSONString = jsonString;
                 while (looper == true)
                 {
@@ -225,7 +226,7 @@ namespace ScriptHelper
                             Application.Exit();
                         }
                         SceneDescriptions.Text = "error - trying to repair JSON. kount = " + errorKount.ToString() +"\r\n" + originalJSONString;
-                        jsonString = await MyGPT.fixJSON(api, originalJSONString ,gptModel);
+                        jsonString = await MyGPT.fixJSON(api, originalJSONString ,gptModel,this);
                         looper = true;
                     }
                 }
@@ -268,7 +269,7 @@ namespace ScriptHelper
         {
             
             SceneText.Text = SceneHint.Text + "\r\n \r\n " + gptModel + " awaiting reply...";
-            string reply =   await MyGPT.makeSceneText(api, gptModel,myMovie, scenes, SceneInScenesList.SelectedIndex + 1);
+            string reply =   await MyGPT.makeSceneText(api, gptModel,myMovie, scenes, SceneInScenesList.SelectedIndex + 1,this);
             SceneText.Text = reply;
 
             
@@ -281,13 +282,13 @@ namespace ScriptHelper
             if (myMovie.movieText.Length > 200)
             {
                 MovieTitle.Text = "making title from long...";
-                reply = await MyGPT.getTitle(api, myMovie.movieText, gptModel);
+                reply = await MyGPT.getTitle(api, myMovie.movieText, gptModel,this);
                 reply = "from long: " + reply;
             }
             else 
             {
                 MovieTitle.Text = "making title from hint...";
-                reply = await MyGPT.getTitle(api, myMovie.movieHintText, gptModel);
+                reply = await MyGPT.getTitle(api, myMovie.movieHintText, gptModel, this);
                 reply = "from hint: " + reply;
             }
 
@@ -299,7 +300,7 @@ namespace ScriptHelper
             if (SceneText.Text.Length > 50)
             {
                 BeatSheetRichTextbox.Text = "making beat sheet from scene descriptiom.... ";
-                BeatSheetRichTextbox.Text = await MyGPT.makeBeatSheet(api, myMovie, SceneText.Text, gptModel);
+                BeatSheetRichTextbox.Text = await MyGPT.makeBeatSheet(api, myMovie, SceneText.Text, gptModel,this);
             }
             else
             {
@@ -312,7 +313,7 @@ namespace ScriptHelper
             if (BeatSheetRichTextbox.Text.Length > 50)
             {
                 SceneScriptRichTextbox.Text = gptModel + " working on scene script....";
-                SceneScriptRichTextbox.Text = await MyGPT.makeSceneScript(api, myMovie, BeatSheetRichTextbox.Text, SceneText.Text,  gptModel);
+                SceneScriptRichTextbox.Text = await MyGPT.makeSceneScript(api, myMovie, BeatSheetRichTextbox.Text, SceneText.Text,  gptModel,this);
             }
             else
             {
@@ -325,24 +326,48 @@ namespace ScriptHelper
 
         }
 
-        public void UpdateLabelText(string text)
-        {
-            MyGPT.testLabel(this, "test XXX");
-            Application.DoEvents();
-        }
+        
 
         private void GPTError_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button5_Click_3(object sender, EventArgs e)
-        {
-            MyGPT.testLabel(this,"test XXX");
-        }
-
+        
         private void ErrorMessage_Click(object sender, EventArgs e)
         {
+
+        }
+
+        public void updateGPTErrorMsg(string input)
+        {
+            ErrorMessage.Text = input;
+            Application.DoEvents();
+
+        }
+
+        private async void button5_Click_3(object sender, EventArgs e)
+        {
+
+            if (NotesForMovieText.Text.Length > 20)
+            {
+                string response = await MyGPT.NotesForMovieText(api, gptModel, myMovie, NotesForMovieText.Text, this);
+                MovieText.Text = response;
+                myMovie.movieText = response;
+            }
+            else
+            {
+
+                MessageBox.Show("Not Enough Text Notes.  Need at least 20 characters ");
+            }
+
+            
+               
+
+
+
+
+
 
         }
     }
