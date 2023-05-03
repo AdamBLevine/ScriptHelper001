@@ -150,7 +150,7 @@ Below is the movie synposis that describes the movie as a whole: \r\n";
 
             }
 
-            userPrompt = "Be sure to add one space after sentence. ";
+            userPrompt = "\r\n Be sure to add one space after sentence. ";
             userPrompt += "Enclose all names of persons or characters in angle brackets <>.  Example <Robert>. ";
             userPrompt += "Please write a detailed narrative scene description from this scene hint: " + sceneList[sceneNum - 1].Description;
 

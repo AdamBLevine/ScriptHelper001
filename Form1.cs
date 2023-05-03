@@ -340,5 +340,10 @@ namespace ScriptHelper
         {
             MyGPT.testLabel(this,"test XXX");
         }
+
+        private void ErrorMessage_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
