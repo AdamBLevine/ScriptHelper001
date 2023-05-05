@@ -45,7 +45,7 @@ namespace ScriptHelper
                 userPrompt = @" We are working on a movie script.  Below will be some hints about the movie.  Do not provide a title for the movie. 
  In the hints character names will be enclosed in angle brackets <>.  Example: <Mary>. Please use the hints to write a detailed description of what
  the movie is about.  As needed, create additional characters. 
- In the output use first names for the characters and for every occurance of a character's name, always enclose the character names within angle brackets, example <Sally>. ";
+ In the output use first names only for the characters and for each and every occurance of a character's name in the output, always enclose the character's names within angle brackets, example <Sally>. ";
                 userPrompt += "Here are the hints to use for writing movie description: ";
                 userPrompt += input;
             }

@@ -22,7 +22,7 @@ namespace ScriptHelper
 
         public OpenAIAPI api = new OpenAIAPI("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");
 
-
+        int NotesTextKount = 0;
         List<SceneObj> scenes;
         List<SceneObj> scenesinscenes;
         SceneObj scene;
@@ -47,6 +47,7 @@ namespace ScriptHelper
 
             ScenesList.DisplayMember = "Title";
 
+            
             MovieHintText.Text = makePrototypeMovieHint();
             MovieText.Text = MovieHintText.Text;
 
@@ -127,6 +128,10 @@ namespace ScriptHelper
             string reply = await MyGPT.makeMovieText(api, MovieHintText.Text, gptModel,this);
             MovieText.Text = reply;
             myMovie.movieText = reply;
+            myMovie.myNoteTextList.Add(new NotesMovieText(MovieText.Text, "","-Origin-"));
+            NotesList.DataSource = myMovie.myNoteTextList;
+            NotesList.DisplayMember = "myLabel";
+            Application.DoEvents();
             
         }
 
@@ -348,13 +353,24 @@ namespace ScriptHelper
 
         private async void button5_Click_3(object sender, EventArgs e)
         {
-
+            
             if (NotesForMovieText.Text.Length > 20)
             {
+                string originalMovieText = myMovie.movieText;
+                string originalNote = NotesForMovieText.Text;
+
                 MovieText.Text = gptModel + " applying Notes to Text....\r\n \r\n" + MovieText.Text;
                 string response = await MyGPT.NotesForMovieText(api, gptModel, myMovie, NotesForMovieText.Text, this);
                 MovieText.Text = response;
                 myMovie.movieText = response;
+                NotesTextKount += 1;
+                myMovie.myNoteTextList.Add(new NotesMovieText(myMovie.movieText, NotesForMovieText.Text, "Note #" + NotesTextKount.ToString()));
+                NotesList.DataSource = null;
+                NotesList.DisplayMember = null;
+                NotesList.DataSource = myMovie.myNoteTextList;
+                NotesList.DisplayMember = "myLabel";
+                NotesList.SelectedIndex = NotesTextKount;
+                Application.DoEvents();
             }
             else
             {
@@ -370,6 +386,17 @@ namespace ScriptHelper
 
 
 
+        }
+
+        private void NotesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (NotesList.SelectedIndex >= 0 && NotesList.SelectedIndex <= myMovie.myNoteTextList.Count)
+            {
+                MovieText.Text = myMovie.myNoteTextList[NotesList.SelectedIndex].myMovieText;
+                NotesForMovieText.Text = myMovie.myNoteTextList[NotesList.SelectedIndex].myNote;
+            }
+            
+            
         }
     }
 }

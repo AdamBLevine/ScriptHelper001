@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Movie = new System.Windows.Forms.TabControl();
             this.MovieTab = new System.Windows.Forms.TabPage();
+            this.NotesList = new System.Windows.Forms.ListBox();
             this.ApplyMovieTextNote = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.NotesForMovieText = new System.Windows.Forms.TextBox();
@@ -71,11 +73,13 @@
             this.ErrorMessage = new System.Windows.Forms.Label();
             this.GPTError = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.movieTextNotesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Movie.SuspendLayout();
             this.MovieTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SentencesInSceneHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SceneCount)).BeginInit();
             this.ScenesTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.movieTextNotesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // Movie
@@ -95,6 +99,7 @@
             // 
             // MovieTab
             // 
+            this.MovieTab.Controls.Add(this.NotesList);
             this.MovieTab.Controls.Add(this.ApplyMovieTextNote);
             this.MovieTab.Controls.Add(this.label4);
             this.MovieTab.Controls.Add(this.NotesForMovieText);
@@ -120,6 +125,18 @@
             this.MovieTab.TabIndex = 0;
             this.MovieTab.Text = "Movie";
             this.MovieTab.UseVisualStyleBackColor = true;
+            // 
+            // NotesList
+            // 
+            this.NotesList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NotesList.FormattingEnabled = true;
+            this.NotesList.ItemHeight = 25;
+            this.NotesList.Location = new System.Drawing.Point(1978, 40);
+            this.NotesList.Name = "NotesList";
+            this.NotesList.ScrollAlwaysVisible = true;
+            this.NotesList.Size = new System.Drawing.Size(296, 529);
+            this.NotesList.TabIndex = 22;
+            this.NotesList.SelectedIndexChanged += new System.EventHandler(this.NotesList_SelectedIndexChanged);
             // 
             // ApplyMovieTextNote
             // 
@@ -263,7 +280,7 @@
             this.ScenesList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ScenesList.FormattingEnabled = true;
             this.ScenesList.ItemHeight = 25;
-            this.ScenesList.Location = new System.Drawing.Point(32, 68);
+            this.ScenesList.Location = new System.Drawing.Point(33, 67);
             this.ScenesList.Margin = new System.Windows.Forms.Padding(4);
             this.ScenesList.Name = "ScenesList";
             this.ScenesList.Size = new System.Drawing.Size(243, 479);
@@ -644,6 +661,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.SceneCount)).EndInit();
             this.ScenesTab.ResumeLayout(false);
             this.ScenesTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.movieTextNotesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -694,6 +712,8 @@
         private System.Windows.Forms.Button ApplyMovieTextNote;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox NotesForMovieText;
+        private System.Windows.Forms.ListBox NotesList;
+        private System.Windows.Forms.BindingSource movieTextNotesBindingSource;
     }
 }
 
