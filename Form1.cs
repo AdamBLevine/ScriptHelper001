@@ -351,6 +351,7 @@ namespace ScriptHelper
 
             if (NotesForMovieText.Text.Length > 20)
             {
+                MovieText.Text = gptModel + " applying Notes to Text....\r\n \r\n" + MovieText.Text;
                 string response = await MyGPT.NotesForMovieText(api, gptModel, myMovie, NotesForMovieText.Text, this);
                 MovieText.Text = response;
                 myMovie.movieText = response;

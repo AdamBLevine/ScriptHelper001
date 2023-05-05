@@ -277,7 +277,8 @@ The beat sheet is organized in a linear or chronological order. Do not include a
             string systemPrompt = " You are an assistant helping a screenwriter write a movie script. ";
             systemPrompt += "In the user prompt you will be provided with a detailed narrative description of the movie.";
             systemPrompt += " You will also be provided with \'notes\' which are instructions for rewriting the detailed narrative description of the movie. ";
-            systemPrompt += " You will rewrite the detailed narrative description of the movie taking into consideration the notes. ";
+            systemPrompt += " You will rewrite the detailed narrative description of the movie taking into consideration the notes. To the degree possible, unless instructed otherwise by the \'note\' ";
+            systemPrompt += " you will retain all the details from the original version. ";
 
 
             string userPrompt = "Here is the detailed narrative description of the movie: \r\n";

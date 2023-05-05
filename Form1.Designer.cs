@@ -30,6 +30,9 @@
         {
             this.Movie = new System.Windows.Forms.TabControl();
             this.MovieTab = new System.Windows.Forms.TabPage();
+            this.ApplyMovieTextNote = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.NotesForMovieText = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.SentencesInSceneHint = new System.Windows.Forms.NumericUpDown();
@@ -68,9 +71,6 @@
             this.ErrorMessage = new System.Windows.Forms.Label();
             this.GPTError = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.NotesForMovieText = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.ApplyMovieTextNote = new System.Windows.Forms.Button();
             this.Movie.SuspendLayout();
             this.MovieTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SentencesInSceneHint)).BeginInit();
@@ -120,6 +120,37 @@
             this.MovieTab.TabIndex = 0;
             this.MovieTab.Text = "Movie";
             this.MovieTab.UseVisualStyleBackColor = true;
+            // 
+            // ApplyMovieTextNote
+            // 
+            this.ApplyMovieTextNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApplyMovieTextNote.Location = new System.Drawing.Point(1258, 603);
+            this.ApplyMovieTextNote.Name = "ApplyMovieTextNote";
+            this.ApplyMovieTextNote.Size = new System.Drawing.Size(186, 51);
+            this.ApplyMovieTextNote.TabIndex = 21;
+            this.ApplyMovieTextNote.Text = "Apply Note";
+            this.ApplyMovieTextNote.UseVisualStyleBackColor = true;
+            this.ApplyMovieTextNote.Click += new System.EventHandler(this.button5_Click_3);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(1253, 417);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(264, 29);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Notes For Movie Text";
+            // 
+            // NotesForMovieText
+            // 
+            this.NotesForMovieText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NotesForMovieText.Location = new System.Drawing.Point(1258, 449);
+            this.NotesForMovieText.Multiline = true;
+            this.NotesForMovieText.Name = "NotesForMovieText";
+            this.NotesForMovieText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.NotesForMovieText.Size = new System.Drawing.Size(683, 139);
+            this.NotesForMovieText.TabIndex = 19;
             // 
             // label10
             // 
@@ -586,36 +617,6 @@
             this.button2.TabIndex = 14;
             this.button2.Text = "Save";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // NotesForMovieText
-            // 
-            this.NotesForMovieText.Location = new System.Drawing.Point(1258, 449);
-            this.NotesForMovieText.Multiline = true;
-            this.NotesForMovieText.Name = "NotesForMovieText";
-            this.NotesForMovieText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.NotesForMovieText.Size = new System.Drawing.Size(683, 139);
-            this.NotesForMovieText.TabIndex = 19;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(1253, 417);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(264, 29);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "Notes For Movie Text";
-            // 
-            // ApplyMovieTextNote
-            // 
-            this.ApplyMovieTextNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ApplyMovieTextNote.Location = new System.Drawing.Point(1258, 603);
-            this.ApplyMovieTextNote.Name = "ApplyMovieTextNote";
-            this.ApplyMovieTextNote.Size = new System.Drawing.Size(186, 51);
-            this.ApplyMovieTextNote.TabIndex = 21;
-            this.ApplyMovieTextNote.Text = "Apply Note";
-            this.ApplyMovieTextNote.UseVisualStyleBackColor = true;
-            this.ApplyMovieTextNote.Click += new System.EventHandler(this.button5_Click_3);
             // 
             // Form1
             // 
