@@ -138,12 +138,12 @@ Below is the movie synposis that describes the movie as a whole: \r\n";
 
             }
 
-            userPrompt = "\r\n Be sure to add one space after sentence. ";
+            userPrompt = "";
             userPrompt += "Enclose all names of persons or characters in angle brackets <>.  Example <Robert>. ";
-            userPrompt += "Please write a detailed narrative scene description from this scene hint: " + sceneList[sceneNum - 1].Hint;
+            userPrompt += "Please write a detailed narrative scene description from this scene hint: \r\n \r\n" + sceneList[sceneNum - 1].Hint;
 
 
-            string response = await UtilsGPT.doGPT(api, model, 500, .7, userPrompt, systemPrompt, errorMsg, myForm);
+            string response = await UtilsGPT.doGPT(api, model, 1000,.7, userPrompt, systemPrompt, errorMsg, myForm);
                                    
             return response;
         }
