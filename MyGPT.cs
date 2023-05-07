@@ -237,6 +237,7 @@ The beat sheet is organized in a linear or chronological order. Do not include a
             userPrompt += "Scene decsription: " + sceneText;
             userPrompt += "\r\n The beat sheet: ";
             userPrompt += beatSheet;
+            userPrompt += "\r\n Please be sure to capture all the detail from the scene narrative and the beat sheet.  Try to use a lot of dialog rather than creating a lot of narrative exposition";
             
             // userPrompt += "\r\n Please return the beat sheet as a list of strings in JSON format ";
 
