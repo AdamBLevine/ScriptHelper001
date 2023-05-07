@@ -29,13 +29,15 @@ namespace ScriptHelper
                     chat.RequestParameters.MaxTokens = tokenMax;
 
                     chat.AppendSystemMessage(systemPrompt);
-
+                    
                     chat.AppendUserInput(userPrompt);
                     response = await chat.GetResponseFromChatbotAsync();
                     looper = false;
                 }
                 catch (Exception ex)
                 {
+                    string msg = ex.Message;
+                    
                     errorKount += 1;
 
                     errorMsg = "GPT busy error kount = " + errorKount.ToString();

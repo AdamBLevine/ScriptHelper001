@@ -32,5 +32,15 @@ namespace ScriptHelper
         {
             return Regex.Replace(input, @"[^\u0000-\u007F]+", "");
         }
+
+        public static string rightOfArrow(string input)
+        {
+            int startIndex = input.IndexOf('>');
+            if (startIndex != -1)
+            {
+                return input.Substring(startIndex + 1);
+            }
+            return input;
+        }
     }
 }

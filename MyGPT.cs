@@ -75,45 +75,31 @@ namespace ScriptHelper
 
 
 
-        public static async Task<string> makeScenesFromMovieText(IOpenAIAPI api, string input, string model, int sceneKount, int sentences, string errorOut,Form1 myForm)
+        public static async Task<string> makeScenesFromMovieText(IOpenAIAPI api, string input, string model, int sceneKount, int tokens, string errorOut,Form1 myForm)
         {
 
             string systemPrompt, userPrompt;
             systemPrompt = "";
             userPrompt = "";
 
-            if (model == "gpt-3.5-turbo")
-            {
-                systemPrompt = "you are a helpful assistant working with a screenwriter to develop a movie script";
-                systemPrompt += " Your output will be in JSON as a list of lists containing all of the scenes. In this form:";
-                systemPrompt += "[[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"]]";
+           
+           
+            systemPrompt = "you are a helpful assistant working with a screenwriter to develop a movie script";
+            systemPrompt += " Your output will be in JSON as a list of lists containing all of the scenes. In this form:";
+            systemPrompt += "[[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"]]";
 
-                userPrompt = " We are working on a movie script.  Below you will find a description of the movie.";
-                userPrompt += " Please output " + sceneKount.ToString() + " scenes for the movie.";
-                userPrompt += " Each scene should include a title and a description of the action in that scene. Do not include scene numbers.";
-                userPrompt += " In the description every occurance of every character name must be enclosed in angle brackets <>.  Example <Robert>.";
+            userPrompt = " We are working on a movie script.  Below you will find a description of the movie.";
+            userPrompt += " Please output " + sceneKount.ToString() + " scenes for the movie.";
+            userPrompt += " Each scene should include a title and a description of the action in that scene. Do not include scene numbers.";
+            userPrompt += " In the description every occurance of every character name must be enclosed in angle brackets <>.  Example <Robert>.";
 
-                userPrompt += $"Each scene description should be at least {sentences} sentences long.  This is the movie description to make into scenes: ";
-                userPrompt += input;
-                userPrompt += " Your output will be in JSON as a list of lists containing all of the scenes. In this form:";
-                userPrompt += "[[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"]]";
+            userPrompt += $"Each scene description should be at least {tokens} tokens long.  Following is the movie description to make into scenes: ";
+            userPrompt += input;
+            userPrompt += " Your output will be in JSON as a list of lists containing all of the scenes. In this form:";
+            userPrompt += "[[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"],[\"scene title\",\"scene description\"]]";
 
-
-
-            }
-            else if (model == "gpt-4")
-            {
-                systemPrompt = " We are working on a movie script.  The user prompt will provide a description of the movie.";
-                systemPrompt += " Please output " + sceneKount.ToString() + " scenes for the movie.";
-                systemPrompt += " Each scene should include a title and a description of the action in that scene. ";
-                systemPrompt += " In the description every occurance of a character's name must be enclosed in angle brackets <>.  Example <Robert>.";
-                systemPrompt += " Do not include scene numbers.  Your output will be as a JSON list of lists.  Thee outer list will be a list of inner lists. Each of the inner lists consisting of two elements: ";
-                systemPrompt += " The first element of each inner list is the title as a string.  The second element in the inner list is the description as a string.";
-                userPrompt = input;
-            }
-
-
-            string response = await UtilsGPT.doGPT(api, model, 1500, .7, userPrompt, systemPrompt, errorOut,myForm);
+            
+            string response = await UtilsGPT.doGPT(api, model, 2500, .7, userPrompt, systemPrompt, errorOut,myForm);
 
            
 
@@ -141,7 +127,7 @@ Below is the movie synposis that describes the movie as a whole: \r\n";
                 {
                     sceneKountStr = sceneKount.ToString();
                     systemPrompt += $"Scene {sceneKountStr}:" + myScene.Title + "\r\n";
-                    systemPrompt += myScene.Description + "\r\n";
+                    systemPrompt += myScene.Hint + "\r\n";
 
                 }
                 else
@@ -154,7 +140,7 @@ Below is the movie synposis that describes the movie as a whole: \r\n";
 
             userPrompt = "\r\n Be sure to add one space after sentence. ";
             userPrompt += "Enclose all names of persons or characters in angle brackets <>.  Example <Robert>. ";
-            userPrompt += "Please write a detailed narrative scene description from this scene hint: " + sceneList[sceneNum - 1].Description;
+            userPrompt += "Please write a detailed narrative scene description from this scene hint: " + sceneList[sceneNum - 1].Hint;
 
 
             string response = await UtilsGPT.doGPT(api, model, 500, .7, userPrompt, systemPrompt, errorMsg, myForm);

@@ -80,7 +80,7 @@ namespace ScriptHelper
                     Application.DoEvents();
 
                     int picked = SceneInScenesList.SelectedIndex;
-                    SceneHint.Text = scenes[picked].Description;
+                    SceneHint.Text = scenes[picked].Hint;
                     Application.DoEvents();
 
                 }
@@ -128,7 +128,7 @@ namespace ScriptHelper
             string reply = await MyGPT.makeMovieText(api, MovieHintText.Text, gptModel,this);
             MovieText.Text = reply;
             myMovie.movieText = reply;
-            myMovie.myNoteTextList.Add(new NotesMovieText(MovieText.Text, "","-Origin-"));
+            myMovie.myNoteTextList.Add(new NotesMovieText(MovieText.Text, "","-Base-"));
             NotesList.DataSource = myMovie.myNoteTextList;
             NotesList.DisplayMember = "myLabel";
             Application.DoEvents();
@@ -210,7 +210,7 @@ namespace ScriptHelper
                 int errorKount = 0;
                 string jsonString = "";
                 string originalJSONString = "";
-                jsonString = await MyGPT.makeScenesFromMovieText(api, MovieText.Text, gptModel, (int)SceneCount.Value,(int)SentencesInSceneHint.Value,GPTError.Text,this);
+                jsonString = await MyGPT.makeScenesFromMovieText(api, MovieText.Text, gptModel, (int)SceneCount.Value,(int)TokensInSceneHint.Value,GPTError.Text,this);
                 originalJSONString = jsonString;
                 while (looper == true)
                 {
@@ -244,9 +244,9 @@ namespace ScriptHelper
 
                     SceneObj scene = new SceneObj();
                     string myTitle = myScene[0];
-                    string myDescription = myScene[1];
+                    string Hint = myScene[1];
                     scene.Title = myTitle;
-                    scene.Description = myDescription;
+                    scene.Hint = Hint;
                     scenes.Add(scene);
                 }
                 ScenesList.DataSource = scenes;
@@ -261,7 +261,7 @@ namespace ScriptHelper
         private void SceneInScenesList_SelectedIndexChanged(object sender, EventArgs e)
         {
             int picked = SceneInScenesList.SelectedIndex;
-            SceneHint.Text = scenes[picked].Description;
+            SceneHint.Text = scenes[picked].Hint;
             Application.DoEvents();
         }
 
@@ -358,13 +358,14 @@ namespace ScriptHelper
             {
                 string originalMovieText = myMovie.movieText;
                 string originalNote = NotesForMovieText.Text;
+                int sourceIndex = NotesList.SelectedIndex;
 
                 MovieText.Text = gptModel + " applying Notes to Text....\r\n \r\n" + MovieText.Text;
                 string response = await MyGPT.NotesForMovieText(api, gptModel, myMovie, NotesForMovieText.Text, this);
                 MovieText.Text = response;
                 myMovie.movieText = response;
                 NotesTextKount += 1;
-                myMovie.myNoteTextList.Add(new NotesMovieText(myMovie.movieText, NotesForMovieText.Text, "Note #" + NotesTextKount.ToString()));
+                myMovie.myNoteTextList.Add(new NotesMovieText(myMovie.movieText, NotesForMovieText.Text, Utils.rightOfArrow(myMovie.myNoteTextList[sourceIndex].myLabel) + " -> Note #" + NotesTextKount.ToString()));
                 NotesList.DataSource = null;
                 NotesList.DisplayMember = null;
                 NotesList.DataSource = myMovie.myNoteTextList;
@@ -397,6 +398,11 @@ namespace ScriptHelper
             }
             
             
+        }
+
+        private void SentencesInSceneHint_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
