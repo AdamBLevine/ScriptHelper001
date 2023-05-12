@@ -33,23 +33,23 @@ namespace ScriptHelper
             return response;
         }
 
-        public static async Task<string> makeMovieText(IOpenAIAPI api, string input, string model,Form1 myForm)
+        public static async Task<string> makeMovieText(IOpenAIAPI api, string input, string model, Form1 myForm)
         {
             string systemPrompt = "";
             string userPrompt = "";
             string errorMsg = "";
-            
-            if (model == "gpt-3.5-turbo")
+
+            if (model == "gpt-3.5-turbo" || model == "gpt-4" )
             {
                 systemPrompt = "you are a helpful assistant.  You are working with a movie screenwriteer to help write a movie script.";
                 userPrompt = @" We are now working on a narrative description of the movie that will be used later to create a movie script.  Below will be some hints about the movie.  Do not provide a title for the movie. 
  In the hints character names will be enclosed in angle brackets <>.  Example: <Mary>. Please use the hints to write a detailed description of what
- the movie is about.  As needed, create additional characters. Do not provide a summary or moral to the story at the end.  WHen the action finishes, that is the end of the narrative.  
- In the output use first names only for the characters and for each and every occurance of a character's name in the output, always enclose the character's names within angle brackets, example <Sally>. ";
-                userPrompt += "Here are the hints to use for writing movie description: ";
+ the movie is about. Be creative! As needed, create additional characters. Do not provide a summary or moral to the story at the end of narrative.  When the action finishes, that is the end of the narrative.  
+ In your output use first names only for the characters.  For every occurance of a character name in the output, enclose the character name within angle brackets <>, example <Sally>.  You must enclose all character names in angle brackets <>. ";
+                userPrompt += "Here are the hints to use for writing movie description: \r\n \r\n";
                 userPrompt += input;
             }
-            else if (model == "gpt-4")
+            /* else if (model == "gpt-4")
 
             {
                 systemPrompt = @" We are working on a movie script.  Below will be some hints about the movie.  Do not provide a title for the movie. 
@@ -57,7 +57,7 @@ namespace ScriptHelper
  the movie is about.  As needed, create additional characters. 
  In the output use first names for the characters and always enclose the character names within angle brackets, example <Sally>. ";
                 userPrompt = input;
-            }
+            }  */
 
             else
 

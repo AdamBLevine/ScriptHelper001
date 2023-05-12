@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ScriptHelper
 {
-    class Utils
+    static class  Utils
     {
 
         public static string TextBetweenBrackets(string input)
@@ -41,6 +41,22 @@ namespace ScriptHelper
                 return input.Substring(startIndex + 1);
             }
             return input;
+        }
+
+        public static string JSONFixer(string incorrectJson)
+        {
+            // Remove whitespace between double [[ or ]]
+            incorrectJson = Regex.Replace(incorrectJson, @"\[\s+\[", "[[");
+            incorrectJson = Regex.Replace(incorrectJson, @"\]\s+\]", "]]");
+
+            // For the pattern ",x if X is not a " add a " in front of N
+            incorrectJson = Regex.Replace(incorrectJson, ",(?!\\\")", ",\"");
+
+            return incorrectJson;
+        }
+        public static void nop()
+        {
+            return;
         }
     }
 }

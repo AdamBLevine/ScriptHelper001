@@ -225,14 +225,28 @@ namespace ScriptHelper
                     catch (Exception ex)
 
                     {
-                        errorKount += 1;
-                        if (errorKount > 5)
+                        
+                        if (errorKount == 0)
+                        
+                        {
+                            errorKount += 1;
+                            jsonString = Utils.JSONFixer(originalJSONString);
+                            Utils.nop();
+                            looper = true;
+                        }
+                        else if (errorKount > 5)
+                        
                         {
                             Application.Exit();
                         }
-                        SceneDescriptions.Text = "error - trying to repair JSON. kount = " + errorKount.ToString() +"\r\n" + originalJSONString;
-                        jsonString = await MyGPT.fixJSON(api, originalJSONString ,gptModel,this);
-                        looper = true;
+                        else
+                        {
+                            errorKount += 1;
+                            SceneDescriptions.Text = "error - trying to repair JSON. kount = " + errorKount.ToString() + "\r\n" + originalJSONString;
+                            jsonString = await MyGPT.fixJSON(api, originalJSONString, gptModel, this);
+                            looper = true;
+                        }
+                        
                     }
                 }
                     
