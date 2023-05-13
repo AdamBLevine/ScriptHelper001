@@ -77,6 +77,9 @@
             this.UITest = new System.Windows.Forms.TabPage();
             this.button5 = new System.Windows.Forms.Button();
             this.JsonTest = new System.Windows.Forms.TextBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.FullScript = new System.Windows.Forms.TabPage();
+            this.FullMovieScript = new System.Windows.Forms.RichTextBox();
             this.Movie.SuspendLayout();
             this.MovieTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TokensInSceneHint)).BeginInit();
@@ -84,6 +87,7 @@
             this.ScenesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.movieTextNotesBindingSource)).BeginInit();
             this.UITest.SuspendLayout();
+            this.FullScript.SuspendLayout();
             this.SuspendLayout();
             // 
             // Movie
@@ -94,6 +98,7 @@
             this.Movie.Controls.Add(this.Locations);
             this.Movie.Controls.Add(this.Parameters);
             this.Movie.Controls.Add(this.UITest);
+            this.Movie.Controls.Add(this.FullScript);
             this.Movie.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Movie.Location = new System.Drawing.Point(59, 30);
             this.Movie.Margin = new System.Windows.Forms.Padding(4);
@@ -104,6 +109,7 @@
             // 
             // MovieTab
             // 
+            this.MovieTab.Controls.Add(this.button8);
             this.MovieTab.Controls.Add(this.MovieText);
             this.MovieTab.Controls.Add(this.NotesList);
             this.MovieTab.Controls.Add(this.ApplyMovieTextNote);
@@ -676,6 +682,37 @@
             this.JsonTest.Size = new System.Drawing.Size(431, 386);
             this.JsonTest.TabIndex = 1;
             // 
+            // button8
+            // 
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.Location = new System.Drawing.Point(750, 471);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(274, 97);
+            this.button8.TabIndex = 24;
+            this.button8.Text = "Full Auto";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // FullScript
+            // 
+            this.FullScript.Controls.Add(this.FullMovieScript);
+            this.FullScript.Location = new System.Drawing.Point(4, 48);
+            this.FullScript.Name = "FullScript";
+            this.FullScript.Size = new System.Drawing.Size(2365, 710);
+            this.FullScript.TabIndex = 7;
+            this.FullScript.Text = "Full Script";
+            this.FullScript.UseVisualStyleBackColor = true;
+            // 
+            // FullMovieScript
+            // 
+            this.FullMovieScript.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FullMovieScript.Location = new System.Drawing.Point(78, 47);
+            this.FullMovieScript.Name = "FullMovieScript";
+            this.FullMovieScript.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.FullMovieScript.Size = new System.Drawing.Size(985, 641);
+            this.FullMovieScript.TabIndex = 0;
+            this.FullMovieScript.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -705,6 +742,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.movieTextNotesBindingSource)).EndInit();
             this.UITest.ResumeLayout(false);
             this.UITest.PerformLayout();
+            this.FullScript.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -760,6 +798,9 @@
         private System.Windows.Forms.TabPage UITest;
         private System.Windows.Forms.TextBox JsonTest;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.TabPage FullScript;
+        private System.Windows.Forms.RichTextBox FullMovieScript;
     }
 }
 

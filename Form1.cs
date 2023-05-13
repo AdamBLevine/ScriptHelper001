@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ScriptHelper
 {
@@ -47,7 +48,7 @@ namespace ScriptHelper
 
             ScenesList.DisplayMember = "Title";
 
-            
+
             MovieHintText.Text = makePrototypeMovieHint();
             MovieText.Text = MovieHintText.Text;
 
@@ -58,7 +59,7 @@ namespace ScriptHelper
 
         }
 
-        
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -109,30 +110,23 @@ namespace ScriptHelper
 
         }
 
-       
+
         private void Label2_Click(object sender, EventArgs e)
         {
 
         }
 
-        
+
 
         private async void Button1_Click_1(object sender, EventArgs e)
         {
 
-            
 
-            
-            
-            MovieText.Text = gptModel + " awaiting reply...\r\n \r\n" + MovieHintText.Text;
-            string reply = await MyGPT.makeMovieText(api, MovieHintText.Text, gptModel,this);
-            MovieText.Text = reply;
-            myMovie.movieText = reply;
-            myMovie.myNoteTextList.Add(new NotesMovieText(MovieText.Text, "","-Base-"));
-            NotesList.DataSource = myMovie.myNoteTextList;
-            NotesList.DisplayMember = "myLabel";
-            Application.DoEvents();
-            
+
+            doMakeMovieText();
+
+
+
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -182,8 +176,8 @@ namespace ScriptHelper
 
         }
 
-        
- 
+
+
         private string makePrototypeMovieHint()
         {
             string hint = @"a 19 year old man <Robert> meets a 39 year old married woman <Beth>, and they both fall in love.  A passionate affair ensues.  <Beth> is married to <Oscar> a successful but cold and harsh 55 year old lawyer.    <Sally> the 12 year old daughter of <Beth> and <Oscar> knows about <Beth>'s affair with <Robert> and pleads with <Beth> to end it.  <Sally> warns <Beth> that <Oscar> is dangerous.   The affair ends tragically when <Oscar> kills <Robert> and <Beth>.  As a prominent citizen and using his skills as a lawyer, <Oscar> is not suspected by the police and he gets away with the crime.  But <Sally> knows that he did it, and torments him for the rest of his life including on his death bed 20 years later. ";
@@ -192,82 +186,10 @@ namespace ScriptHelper
 
         private async void button5_Click(object sender, EventArgs e)
         {
-            List<List<string>> ListofLists = new List<List<string>>();
 
-            if (MovieText.Text.Length < 200)
-            { 
-                MessageBox.Show("Not Enough Movie Text.  Need at least 50 characters "); 
-            }
-
-            else
-            {
-            
-                SceneDescriptions.Clear();
-                SceneDescriptions.Text = Utils.makePendingMessage(gptModel);
+            doMakeMovieText();
 
 
-                bool looper = true;
-                int errorKount = 0;
-                string jsonString = "";
-                string originalJSONString = "";
-                jsonString = await MyGPT.makeScenesFromMovieText(api, MovieText.Text, gptModel, (int)SceneCount.Value,(int)TokensInSceneHint.Value,GPTError.Text,this);
-                originalJSONString = jsonString;
-                while (looper == true)
-                {
-                    try
-                    {
-                        
-                        ListofLists = JsonConvert.DeserializeObject<List<List<string>>>(jsonString);
-                        SceneDescriptions.Text = jsonString;
-                        looper = false;
-                    }
-
-                    catch (Exception ex)
-
-                    {
-                        
-                        if (errorKount == 0)
-                        
-                        {
-                            errorKount += 1;
-                            jsonString = Utils.JSONFixer(originalJSONString);
-                            Utils.nop();
-                            looper = true;
-                        }
-                        else if (errorKount > 5)
-                        
-                        {
-                            Application.Exit();
-                        }
-                        else
-                        {
-                            errorKount += 1;
-                            SceneDescriptions.Text = "error - trying to repair JSON. kount = " + errorKount.ToString() + "\r\n" + originalJSONString;
-                            jsonString = await MyGPT.fixJSON(api, originalJSONString, gptModel, this);
-                            looper = true;
-                        }
-                        
-                    }
-                }
-                    
-                           
-
-                scenes = new List<SceneObj>();
-                foreach (List<string> myScene in ListofLists)
-                {
-
-                    SceneObj scene = new SceneObj();
-                    string myTitle = myScene[0];
-                    string Hint = myScene[1];
-                    scene.Title = myTitle;
-                    scene.Hint = Hint;
-                    scenes.Add(scene);
-                }
-                ScenesList.DataSource = scenes;
-                ScenesList.DisplayMember = "Title";
-
-
-            }
 
 
         }
@@ -281,30 +203,30 @@ namespace ScriptHelper
 
         private void SceneHint_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private async void button6_Click(object sender, EventArgs e)
         {
-            
-            SceneText.Text = SceneHint.Text + "\r\n \r\n " + gptModel + " awaiting reply...";
-            string reply =   await MyGPT.makeSceneText(api, gptModel,myMovie, scenes, SceneInScenesList.SelectedIndex + 1,this);
-            SceneText.Text = reply;
 
-            
+
+            doMakeSceneText();
+
+
+
         }
 
         private async void button7_Click(object sender, EventArgs e)
         {
             string reply;
-            
+
             if (myMovie.movieText.Length > 200)
             {
                 MovieTitle.Text = "making title from long...";
-                reply = await MyGPT.getTitle(api, myMovie.movieText, gptModel,this);
+                reply = await MyGPT.getTitle(api, myMovie.movieText, gptModel, this);
                 reply = "from long: " + reply;
             }
-            else 
+            else
             {
                 MovieTitle.Text = "making title from hint...";
                 reply = await MyGPT.getTitle(api, myMovie.movieHintText, gptModel, this);
@@ -316,28 +238,18 @@ namespace ScriptHelper
 
         private async void button5_Click_1(object sender, EventArgs e)
         {
-            if (SceneText.Text.Length > 50)
-            {
-                BeatSheetRichTextbox.Text = "making beat sheet from scene descriptiom.... ";
-                BeatSheetRichTextbox.Text = await MyGPT.makeBeatSheet(api, myMovie, SceneText.Text, gptModel,this);
-            }
-            else
-            {
-                MessageBox.Show("Not Enough Scene Text.  Need at least 50 characters ");
-            }
+            doMakeBeatSheet();
+
+
+
         }
 
         private async void button5_Click_2(object sender, EventArgs e)
         {
-            if (BeatSheetRichTextbox.Text.Length > 50)
-            {
-                SceneScriptRichTextbox.Text = gptModel + " working on scene script....";
-                SceneScriptRichTextbox.Text = await MyGPT.makeSceneScript(api, myMovie, BeatSheetRichTextbox.Text, SceneText.Text,  gptModel,this);
-            }
-            else
-            {
-                MessageBox.Show("Not Enough Beat Sheet.  Need at least 50 characters ");
-            }
+
+            doWriteSceneScript();
+
+            
         }
 
         private void SceneText_TextChanged(object sender, EventArgs e)
@@ -345,14 +257,14 @@ namespace ScriptHelper
 
         }
 
-        
+
 
         private void GPTError_Click(object sender, EventArgs e)
         {
 
         }
 
-        
+
         private void ErrorMessage_Click(object sender, EventArgs e)
         {
 
@@ -367,7 +279,7 @@ namespace ScriptHelper
 
         private async void button5_Click_3(object sender, EventArgs e)
         {
-            
+
             if (NotesForMovieText.Text.Length > 20)
             {
                 string originalMovieText = myMovie.movieText;
@@ -393,8 +305,8 @@ namespace ScriptHelper
                 MessageBox.Show("Not Enough Text Notes.  Need at least 20 characters ");
             }
 
-            
-               
+
+
 
 
 
@@ -410,8 +322,8 @@ namespace ScriptHelper
                 MovieText.Text = myMovie.myNoteTextList[NotesList.SelectedIndex].myMovieText;
                 NotesForMovieText.Text = myMovie.myNoteTextList[NotesList.SelectedIndex].myNote;
             }
-            
-            
+
+
         }
 
         private void SentencesInSceneHint_ValueChanged(object sender, EventArgs e)
@@ -425,6 +337,169 @@ namespace ScriptHelper
 
             JsonTest.Text = "Fixed: \r\n\rn" + work;
 
+
+        }
+
+        public async void doMakeMovieText()
+        {
+            MovieText.Text = gptModel + " awaiting reply...\r\n \r\n" + MovieHintText.Text;
+            string reply = await MyGPT.makeMovieText(api, MovieHintText.Text, gptModel, this);
+            MovieText.Text = reply;
+            myMovie.movieText = reply;
+            myMovie.myNoteTextList.Add(new NotesMovieText(MovieText.Text, "", "-Base-"));
+            NotesList.DataSource = myMovie.myNoteTextList;
+            NotesList.DisplayMember = "myLabel";
+            Application.DoEvents();
+
+        }
+
+        public async void doMakeScenesFromMovieText()
+        {
+            List<List<string>> ListofLists = new List<List<string>>();
+
+            if (MovieText.Text.Length < 200)
+            {
+                MessageBox.Show("Not Enough Movie Text.  Need at least 50 characters ");
+            }
+
+            else
+            {
+
+                SceneDescriptions.Clear();
+                SceneDescriptions.Text = Utils.makePendingMessage(gptModel);
+
+
+                bool looper = true;
+                int errorKount = 0;
+                string jsonString = "";
+                string originalJSONString = "";
+                jsonString = await MyGPT.makeScenesFromMovieText(api, MovieText.Text, gptModel, (int)SceneCount.Value, (int)TokensInSceneHint.Value, GPTError.Text, this);
+                originalJSONString = jsonString;
+                while (looper == true)
+                {
+                    try
+                    {
+
+                        ListofLists = JsonConvert.DeserializeObject<List<List<string>>>(jsonString);
+                        SceneDescriptions.Text = jsonString;
+                        looper = false;
+                    }
+
+                    catch (Exception ex)
+
+                    {
+
+                        if (errorKount == 0)
+
+                        {
+                            errorKount += 1;
+                            jsonString = Utils.JSONFixer(originalJSONString);
+                            Utils.nop();
+                            looper = true;
+                        }
+                        else if (errorKount > 5)
+
+                        {
+                            Application.Exit();
+                        }
+                        else
+                        {
+                            errorKount += 1;
+                            SceneDescriptions.Text = "error - trying to repair JSON. kount = " + errorKount.ToString() + "\r\n" + originalJSONString;
+                            jsonString = await MyGPT.fixJSON(api, originalJSONString, gptModel, this);
+                            looper = true;
+                        }
+
+                    }
+                }
+
+
+
+                scenes = new List<SceneObj>();
+                foreach (List<string> myScene in ListofLists)
+                {
+
+                    SceneObj scene = new SceneObj();
+                    string myTitle = myScene[0];
+                    string Hint = myScene[1];
+                    scene.Title = myTitle;
+                    scene.Hint = Hint;
+                    scenes.Add(scene);
+                }
+                ScenesList.DataSource = scenes;
+                ScenesList.DisplayMember = "Title";
+
+
+            }
+
+
+        }
+
+        public async void doMakeSceneText()
+        {
+            SceneText.Text = SceneHint.Text + "\r\n \r\n " + gptModel + " awaiting reply...";
+            string reply = await MyGPT.makeSceneText(api, gptModel, myMovie, scenes, SceneInScenesList.SelectedIndex + 1, this);
+            SceneText.Text = reply;
+            scenes[SceneInScenesList.SelectedIndex].NarrativeText = reply;
+        }
+
+        public async void doMakeBeatSheet()
+        {
+            if (SceneText.Text.Length > 50)
+            {
+                BeatSheetRichTextbox.Text = "making beat sheet from scene descriptiom.... ";
+                BeatSheetRichTextbox.Text = await MyGPT.makeBeatSheet(api, myMovie, SceneText.Text, gptModel, this);
+                scenes[SceneInScenesList.SelectedIndex].BeatSheetText = BeatSheetRichTextbox.Text;
+            }
+            else
+            {
+                MessageBox.Show("Not Enough Scene Text.  Need at least 50 characters ");
+            }
+        }
+
+        public async void doWriteSceneScript()
+        {
+            if (BeatSheetRichTextbox.Text.Length > 50)
+            {
+                SceneScriptRichTextbox.Text = gptModel + " working on scene script....";
+                SceneScriptRichTextbox.Text = await MyGPT.makeSceneScript(api, myMovie, BeatSheetRichTextbox.Text, SceneText.Text, gptModel, this);
+            }
+            else
+            {
+                MessageBox.Show("Not Enough Beat Sheet.  Need at least 50 characters ");
+            }
+
+        }
+
+        private async void button8_Click(object sender, EventArgs e)
+        {
+            // write a whole movie script from a movie text
+
+            doMakeScenesFromMovieText();
+            string movieTitle = await MyGPT.getTitle(api, myMovie.movieText, gptModel, this);
+            int sceneKount = 0;
+
+            FullMovieScript.Text = "";
+            FullMovieScript.Text = movieTitle + "\r\n\r\n";
+
+            string mySceneText;
+            string myBeatSheetText;
+            string mySceneScriptText;
+
+
+            foreach (SceneObj theScene in scenes)
+            {
+                sceneKount += 1;
+                mySceneText = await MyGPT.makeSceneText(api, gptModel, myMovie, scenes, sceneKount, this);
+                SceneText.Text = reply;
+                await MyGPT.makeBeatSheet(api, myMovie, SceneText.Text, gptModel, this);
+                scenes[SceneInScenesList.SelectedIndex].BeatSheetText = BeatSheetRichTextbox.Text;
+
+
+                doMakeBeatSheet();
+                doWriteSceneScript();
+
+            }
 
         }
     }
