@@ -418,5 +418,14 @@ namespace ScriptHelper
         {
 
         }
+
+        private void button5_Click_4(object sender, EventArgs e)
+        {
+            string work = Utils.JSONFixer(JsonTest.Text);
+
+            JsonTest.Text = "Fixed: \r\n\rn" + work;
+
+
+        }
     }
 }

@@ -49,10 +49,39 @@ namespace ScriptHelper
             incorrectJson = Regex.Replace(incorrectJson, @"\[\s+\[", "[[");
             incorrectJson = Regex.Replace(incorrectJson, @"\]\s+\]", "]]");
 
-            // For the pattern ",x if X is not a " add a " in front of N
-            incorrectJson = Regex.Replace(incorrectJson, ",(?!\\\")", ",\"");
+            // Remove white space ", " to ","
 
+            
+            incorrectJson = Regex.Replace(incorrectJson, "\",\\s+", "\",");
+
+            //inserts missing " at beginning and end of string
+
+
+            incorrectJson = InsertQuote(incorrectJson);
+
+            incorrectJson = incorrectJson.Substring(1, incorrectJson.Length - 2);
+            incorrectJson = incorrectJson.Replace("[[", "[").Replace("]]", "]");
+            incorrectJson = "[" + incorrectJson + "]";
             return incorrectJson;
+        }
+
+        public static string InsertQuote(string inputString)
+        {
+            var sb = new StringBuilder();
+
+            for (int i = 0; i < inputString.Length; i++)
+            {
+                sb.Append(inputString[i]);
+
+                // Check for the pattern '",x' where x is any character not '"'
+                if (i > 1 && inputString[i - 2] == '"' && inputString[i - 1] == ',' && inputString[i] != '"')
+                {
+                    // Insert '"' before x
+                    sb.Insert(sb.Length - 1, '"');
+                }
+            }
+
+            return sb.ToString();
         }
         public static void nop()
         {
