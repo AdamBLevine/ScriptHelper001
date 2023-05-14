@@ -45,6 +45,10 @@ namespace ScriptHelper
 
         public static string JSONFixer(string incorrectJson)
         {
+            // remove trailing and leading space
+
+            incorrectJson = incorrectJson.Trim();
+            
             // Remove whitespace between double [[ or ]]
             incorrectJson = Regex.Replace(incorrectJson, @"\[\s+\[", "[[");
             incorrectJson = Regex.Replace(incorrectJson, @"\]\s+\]", "]]");

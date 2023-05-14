@@ -122,9 +122,14 @@ namespace ScriptHelper
         {
 
 
-
-            doMakeMovieText();
-
+            MovieText.Text = gptModel + " awaiting reply...\r\n \r\n" + MovieHintText.Text;
+            string reply = await doMakeMovieText(MovieHintText.Text);
+            MovieText.Text = reply;
+            myMovie.movieText = reply;
+            myMovie.myNoteTextList.Add(new NotesMovieText(MovieText.Text, "", "-Base-"));
+            NotesList.DataSource = myMovie.myNoteTextList;
+            NotesList.DisplayMember = "myLabel";
+            Application.DoEvents();
 
 
         }
@@ -187,7 +192,7 @@ namespace ScriptHelper
         private async void button5_Click(object sender, EventArgs e)
         {
 
-            doMakeMovieText();
+            doMakeScenesFromMovieText();
 
 
 
@@ -340,17 +345,12 @@ namespace ScriptHelper
 
         }
 
-        public async void doMakeMovieText()
+        public async Task<string> doMakeMovieText(string input)
         {
-            MovieText.Text = gptModel + " awaiting reply...\r\n \r\n" + MovieHintText.Text;
-            string reply = await MyGPT.makeMovieText(api, MovieHintText.Text, gptModel, this);
-            MovieText.Text = reply;
-            myMovie.movieText = reply;
-            myMovie.myNoteTextList.Add(new NotesMovieText(MovieText.Text, "", "-Base-"));
-            NotesList.DataSource = myMovie.myNoteTextList;
-            NotesList.DisplayMember = "myLabel";
-            Application.DoEvents();
+            
+            string reply = await MyGPT.makeMovieText(api, input, gptModel, this);
 
+            return reply.ToString();
         }
 
         public async void doMakeScenesFromMovieText()
@@ -475,7 +475,11 @@ namespace ScriptHelper
         {
             // write a whole movie script from a movie text
 
-            doMakeScenesFromMovieText();
+            if (scenes == null || scenes.Count == 0)
+            {
+                MessageBox.Show("Scenes not yet made ");
+                return;
+            }
             string movieTitle = await MyGPT.getTitle(api, myMovie.movieText, gptModel, this);
             int sceneKount = 0;
 
@@ -491,15 +495,21 @@ namespace ScriptHelper
             {
                 sceneKount += 1;
                 mySceneText = await MyGPT.makeSceneText(api, gptModel, myMovie, scenes, sceneKount, this);
-                SceneText.Text = reply;
-                await MyGPT.makeBeatSheet(api, myMovie, SceneText.Text, gptModel, this);
-                scenes[SceneInScenesList.SelectedIndex].BeatSheetText = BeatSheetRichTextbox.Text;
+                SceneText.Text = mySceneText;
+                myBeatSheetText = await MyGPT.makeBeatSheet(api, myMovie, SceneText.Text, gptModel, this);
+                BeatSheetRichTextbox.Text = myBeatSheetText;
+                scenes[sceneKount -1].BeatSheetText = myBeatSheetText;
 
+                mySceneScriptText = await MyGPT.makeSceneScript(api, myMovie, myBeatSheetText, mySceneText, gptModel, this);
+                SceneScriptRichTextbox.Text = mySceneScriptText;
+                scenes[sceneKount - 1].SceneScript = mySceneScriptText;
 
-                doMakeBeatSheet();
-                doWriteSceneScript();
+                FullMovieScript.Text += $"Scene #{sceneKount} - {scenes[sceneKount - 1].Title}" + "\r\n\r\n";
+                FullMovieScript.Text += mySceneScriptText + "\r\n\r\n"; 
 
             }
+
+            return;
 
         }
     }
