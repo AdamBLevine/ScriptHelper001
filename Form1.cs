@@ -474,6 +474,10 @@ namespace ScriptHelper
         private async void button8_Click(object sender, EventArgs e)
         {
             // write a whole movie script from a movie text
+            Font boldFont = new Font(FullMovieScript.Font, FontStyle.Bold);
+            Font regularFont = new Font(FullMovieScript.Font, FontStyle.Regular);
+
+
 
             if (scenes == null || scenes.Count == 0)
             {
@@ -483,8 +487,11 @@ namespace ScriptHelper
             string movieTitle = await MyGPT.getTitle(api, myMovie.movieText, gptModel, this);
             int sceneKount = 0;
 
+            FullMovieScript.Font = boldFont;
             FullMovieScript.Text = "";
             FullMovieScript.Text = movieTitle + "\r\n\r\n";
+
+            FullMovieScript.Font = regularFont;
 
             string mySceneText;
             string myBeatSheetText;
@@ -504,7 +511,9 @@ namespace ScriptHelper
                 SceneScriptRichTextbox.Text = mySceneScriptText;
                 scenes[sceneKount - 1].SceneScript = mySceneScriptText;
 
+                FullMovieScript.Font = boldFont;
                 FullMovieScript.Text += $"Scene #{sceneKount} - {scenes[sceneKount - 1].Title}" + "\r\n\r\n";
+                FullMovieScript.Font = regularFont;
                 FullMovieScript.Text += mySceneScriptText + "\r\n\r\n"; 
 
             }
