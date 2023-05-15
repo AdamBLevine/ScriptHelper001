@@ -292,7 +292,7 @@ namespace ScriptHelper
                 int sourceIndex = NotesList.SelectedIndex;
 
                 MovieText.Text = gptModel + " applying Notes to Text....\r\n \r\n" + MovieText.Text;
-                string response = await MyGPT.NotesForMovieText(api, gptModel, myMovie, NotesForMovieText.Text, this);
+                string response = await MyGPT.NotesForMovieText(api, gptModel, MovieText.Text, NotesForMovieText.Text, this);
                 MovieText.Text = response;
                 myMovie.movieText = response;
                 NotesTextKount += 1;
@@ -338,11 +338,18 @@ namespace ScriptHelper
 
         private void button5_Click_4(object sender, EventArgs e)
         {
-            string work = Utils.JSONFixer(JsonTest.Text);
+            
+            Font boldFont = new Font(BoldBox.Font, FontStyle.Bold);
+            Font regularFont = new Font(BoldBox.Font, FontStyle.Regular);
+            
+            
+            BoldBox.Focus();
+            BoldBox.AppendText("123 456 789");
+            BoldBox.Select(0, 11);
+            BoldBox.SelectionFont = boldFont;
+            
 
-            JsonTest.Text = "Fixed: \r\n\rn" + work;
-
-
+            BoldBox.Text += "\r\nabc def ghi";
         }
 
         public async Task<string> doMakeMovieText(string input)

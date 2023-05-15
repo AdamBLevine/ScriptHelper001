@@ -258,7 +258,7 @@ The beat sheet is organized in a linear or chronological order. Do not include a
         }
 
 
-        public static async Task<string> NotesForMovieText(IOpenAIAPI api, string model, MovieObj myMovie, string textNote, Form1 myForm)
+        public static async Task<string> NotesForMovieText(IOpenAIAPI api, string model, string movieText, string textNote, Form1 myForm)
         {
             string errorMsg = "";
             string systemPrompt = " You are an assistant helping a screenwriter write a movie script. ";
@@ -267,9 +267,10 @@ The beat sheet is organized in a linear or chronological order. Do not include a
             systemPrompt += " You will rewrite the detailed narrative description of the movie taking into consideration the notes. To the degree possible, unless instructed otherwise by the \'note\' ";
             systemPrompt += " you will retain all the details from the original version. ";
 
-
-            string userPrompt = "Here is the detailed narrative description of the movie: \r\n";
-            userPrompt += myMovie.movieText;
+            string userPrompt = "You will rewrite the detailed narrative description of the movie taking into consideration the notes. To the degree possible, unless instructed otherwise by the \'note\' ";
+            userPrompt += " you will retain all the details from the original version. ";
+            userPrompt += "Here is the detailed narrative description of the movie: \r\n";
+            userPrompt += movieText;
             userPrompt += "\r\n Here are the notes to use for rewriting the detailed narrative description of the movie: \r\n ";
             userPrompt += textNote;
             userPrompt += " Please rewrite the detailed narrative description of the movie considering the notes";
