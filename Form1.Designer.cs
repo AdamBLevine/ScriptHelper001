@@ -113,6 +113,7 @@
             // 
             // MovieTab
             // 
+            this.MovieTab.Controls.Add(this.button8);
             this.MovieTab.Controls.Add(this.MovieText);
             this.MovieTab.Controls.Add(this.NotesList);
             this.MovieTab.Controls.Add(this.ApplyMovieTextNote);
@@ -141,9 +142,9 @@
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(1321, 807);
+            this.button8.Location = new System.Drawing.Point(1552, 597);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(274, 97);
+            this.button8.Size = new System.Drawing.Size(216, 97);
             this.button8.TabIndex = 24;
             this.button8.Text = "Full Auto";
             this.button8.UseVisualStyleBackColor = true;
@@ -174,9 +175,9 @@
             // ApplyMovieTextNote
             // 
             this.ApplyMovieTextNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ApplyMovieTextNote.Location = new System.Drawing.Point(615, 654);
+            this.ApplyMovieTextNote.Location = new System.Drawing.Point(615, 653);
             this.ApplyMovieTextNote.Name = "ApplyMovieTextNote";
-            this.ApplyMovieTextNote.Size = new System.Drawing.Size(186, 51);
+            this.ApplyMovieTextNote.Size = new System.Drawing.Size(186, 45);
             this.ApplyMovieTextNote.TabIndex = 21;
             this.ApplyMovieTextNote.Text = "Apply Note";
             this.ApplyMovieTextNote.UseVisualStyleBackColor = true;
@@ -310,7 +311,7 @@
             this.button1.Location = new System.Drawing.Point(289, 660);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(220, 38);
+            this.button1.Size = new System.Drawing.Size(259, 38);
             this.button1.TabIndex = 4;
             this.button1.Text = "Make Movie Text                                                                  " +
     "                                                                                " +
@@ -741,7 +742,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1910, 926);
-            this.Controls.Add(this.button8);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.GPTError);
             this.Controls.Add(this.ErrorMessage);

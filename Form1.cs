@@ -50,10 +50,10 @@ namespace ScriptHelper
 
 
             MovieHintText.Text = makePrototypeMovieHint();
-            MovieText.Text = MovieHintText.Text;
+            
 
             myMovie.movieHintText = MovieHintText.Text;
-            myMovie.movieText = MovieHintText.Text;
+            
 
             Movie.SelectedIndexChanged += Movie_SelectedIndexChanged;
 
