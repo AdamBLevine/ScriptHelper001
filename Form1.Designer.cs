@@ -40,8 +40,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.TokensInSceneHint = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.SceneDescriptions = new System.Windows.Forms.TextBox();
             this.SceneCount = new System.Windows.Forms.NumericUpDown();
             this.MakeSceneList = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -80,6 +78,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.movieTextNotesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.BoldBox = new System.Windows.Forms.RichTextBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.SceneDescriptions = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.Movie.SuspendLayout();
             this.MovieTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TokensInSceneHint)).BeginInit();
@@ -88,6 +90,7 @@
             this.UITest.SuspendLayout();
             this.FullScript.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.movieTextNotesBindingSource)).BeginInit();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Movie
@@ -99,17 +102,17 @@
             this.Movie.Controls.Add(this.Parameters);
             this.Movie.Controls.Add(this.UITest);
             this.Movie.Controls.Add(this.FullScript);
+            this.Movie.Controls.Add(this.tabPage1);
             this.Movie.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Movie.Location = new System.Drawing.Point(59, 30);
             this.Movie.Margin = new System.Windows.Forms.Padding(4);
             this.Movie.Name = "Movie";
             this.Movie.SelectedIndex = 0;
-            this.Movie.Size = new System.Drawing.Size(2373, 762);
+            this.Movie.Size = new System.Drawing.Size(1834, 762);
             this.Movie.TabIndex = 0;
             // 
             // MovieTab
             // 
-            this.MovieTab.Controls.Add(this.button8);
             this.MovieTab.Controls.Add(this.MovieText);
             this.MovieTab.Controls.Add(this.NotesList);
             this.MovieTab.Controls.Add(this.ApplyMovieTextNote);
@@ -118,8 +121,6 @@
             this.MovieTab.Controls.Add(this.label10);
             this.MovieTab.Controls.Add(this.label7);
             this.MovieTab.Controls.Add(this.TokensInSceneHint);
-            this.MovieTab.Controls.Add(this.label5);
-            this.MovieTab.Controls.Add(this.SceneDescriptions);
             this.MovieTab.Controls.Add(this.SceneCount);
             this.MovieTab.Controls.Add(this.MakeSceneList);
             this.MovieTab.Controls.Add(this.label3);
@@ -132,7 +133,7 @@
             this.MovieTab.Margin = new System.Windows.Forms.Padding(4);
             this.MovieTab.Name = "MovieTab";
             this.MovieTab.Padding = new System.Windows.Forms.Padding(4);
-            this.MovieTab.Size = new System.Drawing.Size(2365, 710);
+            this.MovieTab.Size = new System.Drawing.Size(1826, 710);
             this.MovieTab.TabIndex = 0;
             this.MovieTab.Text = "Movie";
             this.MovieTab.UseVisualStyleBackColor = true;
@@ -140,7 +141,7 @@
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(750, 471);
+            this.button8.Location = new System.Drawing.Point(1321, 807);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(274, 97);
             this.button8.TabIndex = 24;
@@ -151,10 +152,10 @@
             // MovieText
             // 
             this.MovieText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MovieText.Location = new System.Drawing.Point(1258, 52);
+            this.MovieText.Location = new System.Drawing.Point(826, 56);
             this.MovieText.Name = "MovieText";
             this.MovieText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.MovieText.Size = new System.Drawing.Size(659, 316);
+            this.MovieText.Size = new System.Drawing.Size(659, 642);
             this.MovieText.TabIndex = 23;
             this.MovieText.Text = "";
             // 
@@ -163,7 +164,7 @@
             this.NotesList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NotesList.FormattingEnabled = true;
             this.NotesList.ItemHeight = 25;
-            this.NotesList.Location = new System.Drawing.Point(1978, 40);
+            this.NotesList.Location = new System.Drawing.Point(1509, 52);
             this.NotesList.Name = "NotesList";
             this.NotesList.ScrollAlwaysVisible = true;
             this.NotesList.Size = new System.Drawing.Size(296, 529);
@@ -173,7 +174,7 @@
             // ApplyMovieTextNote
             // 
             this.ApplyMovieTextNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ApplyMovieTextNote.Location = new System.Drawing.Point(1258, 603);
+            this.ApplyMovieTextNote.Location = new System.Drawing.Point(615, 654);
             this.ApplyMovieTextNote.Name = "ApplyMovieTextNote";
             this.ApplyMovieTextNote.Size = new System.Drawing.Size(186, 51);
             this.ApplyMovieTextNote.TabIndex = 21;
@@ -185,7 +186,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(1253, 417);
+            this.label4.Location = new System.Drawing.Point(301, 464);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(264, 29);
             this.label4.TabIndex = 20;
@@ -194,11 +195,11 @@
             // NotesForMovieText
             // 
             this.NotesForMovieText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NotesForMovieText.Location = new System.Drawing.Point(1258, 449);
+            this.NotesForMovieText.Location = new System.Drawing.Point(295, 496);
             this.NotesForMovieText.Multiline = true;
             this.NotesForMovieText.Name = "NotesForMovieText";
             this.NotesForMovieText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.NotesForMovieText.Size = new System.Drawing.Size(683, 139);
+            this.NotesForMovieText.Size = new System.Drawing.Size(506, 139);
             this.NotesForMovieText.TabIndex = 19;
             // 
             // label10
@@ -253,28 +254,6 @@
             0});
             this.TokensInSceneHint.ValueChanged += new System.EventHandler(this.SentencesInSceneHint_ValueChanged);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(312, 11);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(249, 29);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Screen Descriptions";
-            // 
-            // SceneDescriptions
-            // 
-            this.SceneDescriptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SceneDescriptions.Location = new System.Drawing.Point(317, 52);
-            this.SceneDescriptions.Margin = new System.Windows.Forms.Padding(4);
-            this.SceneDescriptions.Multiline = true;
-            this.SceneDescriptions.Name = "SceneDescriptions";
-            this.SceneDescriptions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.SceneDescriptions.Size = new System.Drawing.Size(384, 592);
-            this.SceneDescriptions.TabIndex = 14;
-            // 
             // SceneCount
             // 
             this.SceneCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -305,7 +284,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(27, 34);
+            this.label3.Location = new System.Drawing.Point(31, 11);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 29);
@@ -318,20 +297,20 @@
             this.ScenesList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ScenesList.FormattingEnabled = true;
             this.ScenesList.ItemHeight = 25;
-            this.ScenesList.Location = new System.Drawing.Point(33, 67);
+            this.ScenesList.Location = new System.Drawing.Point(33, 52);
             this.ScenesList.Margin = new System.Windows.Forms.Padding(4);
             this.ScenesList.Name = "ScenesList";
-            this.ScenesList.Size = new System.Drawing.Size(243, 479);
+            this.ScenesList.Size = new System.Drawing.Size(243, 504);
             this.ScenesList.TabIndex = 5;
             this.ScenesList.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(740, 397);
+            this.button1.Location = new System.Drawing.Point(289, 660);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(285, 38);
+            this.button1.Size = new System.Drawing.Size(220, 38);
             this.button1.TabIndex = 4;
             this.button1.Text = "Make Movie Text                                                                  " +
     "                                                                                " +
@@ -343,7 +322,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1253, 0);
+            this.label2.Location = new System.Drawing.Point(821, 11);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(141, 29);
@@ -355,28 +334,29 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(735, 11);
+            this.label1.Location = new System.Drawing.Point(301, 11);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(207, 29);
+            this.label1.Size = new System.Drawing.Size(136, 29);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Movie Text Hints";
+            this.label1.Text = "Movie Hint";
             this.label1.Click += new System.EventHandler(this.Label1_Click);
             // 
             // MovieHintText
             // 
             this.MovieHintText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MovieHintText.Location = new System.Drawing.Point(740, 52);
+            this.MovieHintText.Location = new System.Drawing.Point(295, 52);
             this.MovieHintText.Margin = new System.Windows.Forms.Padding(4);
             this.MovieHintText.Multiline = true;
             this.MovieHintText.Name = "MovieHintText";
             this.MovieHintText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.MovieHintText.Size = new System.Drawing.Size(506, 316);
+            this.MovieHintText.Size = new System.Drawing.Size(506, 405);
             this.MovieHintText.TabIndex = 0;
             this.MovieHintText.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // ScenesTab
             // 
+            this.ScenesTab.Controls.Add(this.label11);
             this.ScenesTab.Controls.Add(this.BeatSheetRichTextbox);
             this.ScenesTab.Controls.Add(this.SceneScriptRichTextbox);
             this.ScenesTab.Controls.Add(this.label9);
@@ -392,7 +372,7 @@
             this.ScenesTab.Margin = new System.Windows.Forms.Padding(4);
             this.ScenesTab.Name = "ScenesTab";
             this.ScenesTab.Padding = new System.Windows.Forms.Padding(4);
-            this.ScenesTab.Size = new System.Drawing.Size(2365, 710);
+            this.ScenesTab.Size = new System.Drawing.Size(1826, 710);
             this.ScenesTab.TabIndex = 1;
             this.ScenesTab.Text = "Scenes";
             this.ScenesTab.UseVisualStyleBackColor = true;
@@ -411,11 +391,11 @@
             // SceneScriptRichTextbox
             // 
             this.SceneScriptRichTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SceneScriptRichTextbox.Location = new System.Drawing.Point(1351, 48);
+            this.SceneScriptRichTextbox.Location = new System.Drawing.Point(1287, 48);
             this.SceneScriptRichTextbox.Margin = new System.Windows.Forms.Padding(4);
             this.SceneScriptRichTextbox.Name = "SceneScriptRichTextbox";
             this.SceneScriptRichTextbox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.SceneScriptRichTextbox.Size = new System.Drawing.Size(683, 586);
+            this.SceneScriptRichTextbox.Size = new System.Drawing.Size(516, 591);
             this.SceneScriptRichTextbox.TabIndex = 11;
             this.SceneScriptRichTextbox.Text = "";
             // 
@@ -423,7 +403,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(1355, 14);
+            this.label9.Location = new System.Drawing.Point(1282, 14);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(162, 29);
@@ -433,7 +413,7 @@
             // WriteSceneBtn
             // 
             this.WriteSceneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WriteSceneBtn.Location = new System.Drawing.Point(1351, 647);
+            this.WriteSceneBtn.Location = new System.Drawing.Point(1287, 655);
             this.WriteSceneBtn.Margin = new System.Windows.Forms.Padding(4);
             this.WriteSceneBtn.Name = "WriteSceneBtn";
             this.WriteSceneBtn.Size = new System.Drawing.Size(300, 47);
@@ -480,12 +460,12 @@
             // SceneText
             // 
             this.SceneText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SceneText.Location = new System.Drawing.Point(761, 256);
+            this.SceneText.Location = new System.Drawing.Point(767, 293);
             this.SceneText.Margin = new System.Windows.Forms.Padding(4);
             this.SceneText.Multiline = true;
             this.SceneText.Name = "SceneText";
             this.SceneText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.SceneText.Size = new System.Drawing.Size(512, 364);
+            this.SceneText.Size = new System.Drawing.Size(512, 342);
             this.SceneText.TabIndex = 3;
             this.SceneText.TextChanged += new System.EventHandler(this.SceneText_TextChanged);
             // 
@@ -601,7 +581,7 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(1403, 815);
+            this.button4.Location = new System.Drawing.Point(2140, 828);
             this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(164, 55);
@@ -713,11 +693,55 @@
             this.BoldBox.TabIndex = 1;
             this.BoldBox.Text = "";
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.SceneDescriptions);
+            this.tabPage1.Location = new System.Drawing.Point(4, 48);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(2365, 710);
+            this.tabPage1.TabIndex = 8;
+            this.tabPage1.Text = "Debug";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // SceneDescriptions
+            // 
+            this.SceneDescriptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SceneDescriptions.Location = new System.Drawing.Point(26, 71);
+            this.SceneDescriptions.Margin = new System.Windows.Forms.Padding(4);
+            this.SceneDescriptions.Multiline = true;
+            this.SceneDescriptions.Name = "SceneDescriptions";
+            this.SceneDescriptions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.SceneDescriptions.Size = new System.Drawing.Size(384, 592);
+            this.SceneDescriptions.TabIndex = 15;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(32, 21);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(172, 29);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Screen JSON";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(771, 259);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(145, 29);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "Scene Text";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2509, 926);
+            this.ClientSize = new System.Drawing.Size(1910, 926);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.GPTError);
             this.Controls.Add(this.ErrorMessage);
@@ -742,6 +766,8 @@
             this.UITest.ResumeLayout(false);
             this.FullScript.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.movieTextNotesBindingSource)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -766,8 +792,6 @@
         private System.Windows.Forms.RadioButton SelectGPT4;
         private System.Windows.Forms.Button MakeSceneList;
         private System.Windows.Forms.NumericUpDown SceneCount;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox SceneDescriptions;
         private System.Windows.Forms.ListBox SceneInScenesList;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox SceneHint;
@@ -800,6 +824,10 @@
         private System.Windows.Forms.TabPage FullScript;
         private System.Windows.Forms.RichTextBox FullMovieScript;
         private System.Windows.Forms.RichTextBox BoldBox;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox SceneDescriptions;
+        private System.Windows.Forms.Label label11;
     }
 }
 
