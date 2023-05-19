@@ -21,7 +21,7 @@ namespace ScriptHelper
     public partial class Form1 : Form
     {
 
-        public OpenAIAPI api = new OpenAIAPI("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");
+        public OpenAIAPI api = new OpenAIAPI("Your Open AI key here");
 
         int NotesTextKount = 0;
         List<SceneObj> scenes;
