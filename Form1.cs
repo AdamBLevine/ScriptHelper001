@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 using System.Runtime.Remoting.Messaging;
 using System.Security.Cryptography.X509Certificates;
+using System.IO;
 
 namespace ScriptHelper
 {
@@ -21,7 +22,8 @@ namespace ScriptHelper
     public partial class Form1 : Form
     {
 
-        public OpenAIAPI api = new OpenAIAPI("Your Open AI key here");
+
+        public OpenAIAPI api; 
 
         int NotesTextKount = 0;
         List<SceneObj> scenes;
@@ -37,7 +39,7 @@ namespace ScriptHelper
         public Form1()
         {
             InitializeComponent();
-
+            api = new OpenAIAPI(getOpenAIPassword());
             SelectGPT35.Checked = true;
 
             // makeProtoTypeScenes();
@@ -59,7 +61,18 @@ namespace ScriptHelper
 
         }
 
+        private string getOpenAIPassword()
+        {
+            string path = @"D:\OOAIpwd.txt";
 
+            using (StreamReader sr = new StreamReader(path))
+            {
+                // Read the first line from the file
+                string pwd = sr.ReadLine();
+                return pwd;
+
+            }
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -275,9 +288,15 @@ namespace ScriptHelper
 
         }
 
-        public void updateGPTErrorMsg(string input)
+        public void updateGPTErrorMsg(string errorMsg,string exMessage)
         {
-            ErrorMessage.Text = input;
+            ErrorMessage.Text = errorMsg;
+
+            if ( errorMsg.Length > 0)
+            {
+                ErrorLogBox.Text += exMessage + "\r\n";
+            }
+            
             Application.DoEvents();
 
         }

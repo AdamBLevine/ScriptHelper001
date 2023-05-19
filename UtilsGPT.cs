@@ -18,11 +18,13 @@ namespace ScriptHelper
             string response = "";
             int errorKount = 0;
             Boolean looper = true;
+            myForm.updateGPTErrorMsg("","");
             // UpdateError("test XXX");
             while (looper)
             {
                 try
                 {
+                    
                     response = "";
                     var chat = api.Chat.CreateConversation();
                     chat.RequestParameters.Model = model;
@@ -36,13 +38,14 @@ namespace ScriptHelper
                 }
                 catch (Exception ex)
                 {
-                    string msg = ex.Message;
+                    string exMessage = ex.Message;
                     
                     errorKount += 1;
+                    DateTime currentDateTime = DateTime.Now;
 
-                    errorMsg = "GPT busy error kount = " + errorKount.ToString();
+                    errorMsg = "GPT busy error kount = " + errorKount.ToString() + " at " + currentDateTime;
 
-                    myForm.updateGPTErrorMsg(errorMsg);
+                    myForm.updateGPTErrorMsg(errorMsg,exMessage);
 
                     Console.WriteLine(errorMsg);
                     
