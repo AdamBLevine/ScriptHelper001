@@ -601,6 +601,7 @@
             // 
             // ErrorLogBox
             // 
+            this.ErrorLogBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ErrorLogBox.Location = new System.Drawing.Point(348, 58);
             this.ErrorLogBox.Name = "ErrorLogBox";
             this.ErrorLogBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
